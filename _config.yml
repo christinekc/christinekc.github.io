@@ -8,22 +8,22 @@
 #                                                 /____/
 #
 # Title of your website
-title: "Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography"
+title: "Christine KC Cheng – Web Development, Data Visualization, GIS, Maps, and Cartography"
 
-title_short: "Chris Henrick"
+title_short: "Christine KC Cheng"
 
 # The slogan describes your website and is used on homepage in <title> and other important places
 slogan: "Web Development, Data Visualization, GIS, Maps, & Cartography"
 
 # The description is used on homepage and in the footer to quickly describe your website. Use a maximum of 150 characters for SEO-purposes.
-description: "The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services."
+description: "The portfolio and technical blog of Christine KC Cheng – provider of professional web development, data visualization, GIS, mapping, & cartography services."
 
 # Main author of the website
 # See > authors.yml
-author: clhenrick
+author: christinekc
 
 # This URL is the main address for absolute links. Don't include a slash at the end.
-url: 'http://clhenrick.io'
+url: 'christinekc.com'
 baseurl: ''
 
 # This is for the editing function in _/includes/improve_content
@@ -125,7 +125,7 @@ defaults:
       show_meta: true 	# Hide metadata for all pages
       # sidebar:    		# Possible values › left, right › by default there will be no sidebar
       comments: false
-      author: clhenrick     # Default author for pages
+      author: christinekc     # Default author for pages
   -
     scope:
       path: ""
@@ -134,7 +134,7 @@ defaults:
       show_meta: true   # Show metadata for all posts
       # sidebar:        # Possible values › left, right › by default there will be no sidebar
       comments: true
-      author: clhenrick     # Default author for posts
+      author: christinekc     # Default author for posts
 
 
 
