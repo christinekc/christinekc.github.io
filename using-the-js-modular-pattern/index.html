@@ -1,0 +1,869 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+		<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Using the Module Pattern in Javascript Programming</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/styles_feeling_responsive.css" />
+	<script src="http://localhost:4000/assets/js/modernizr.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: [ 'Lato:400,700,400italic:latin', 'Work+Sans:400,700:latin' ]
+      }
+    });
+  </script>
+
+  <noscript>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic|Volkhov' rel='stylesheet' type='text/css' />
+  </noscript>
+
+  <meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA" />
+	
+	<meta name="description" content="The benefits of using the Javascript module programming pattern to build client-side, interactive, web-mapping applications." />
+
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729"/>
+
+	
+
+
+
+	
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png" />
+
+
+
+
+	
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png" />	
+
+
+
+
+	
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png" />
+
+
+
+
+	
+	<meta name="msapplication-TileColor" content="#fabb00" />
+
+
+
+	<!-- Facebook Optimization -->
+	<meta property="og:locale" content="en_EN" />
+	
+	<meta property="og:title" content="Using the Module Pattern in Javascript Programming" />
+	<meta property="og:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, &amp; cartography services." />
+	<meta property="og:url" content="http://localhost:4000//using-the-js-modular-pattern/" />
+	<meta property="og:site_name" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography" />
+	
+
+	
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="">
+	<meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA">
+	
+	
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729">
+	
+	
+	<link rel="canonical" href="http://localhost:4000/using-the-js-modular-pattern/">
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@chrislhenrick">
+	<meta name="twitter:creator" content="@chrislhenrick">
+	<meta name="twitter:title" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography">
+	<meta name="twitter:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.">
+	<meta name="twitter:image" content="http://localhost:4000/images/clhenrick-landing-header.jpg">
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000/humans.txt" />
+
+	
+
+	
+</head>
+
+</head>
+<body id="top-of-page" class="">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="show-for-small-only"><a href="http://localhost:4000" class="icon-tree"> Chris Henrick</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="right">
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/search/">Search</a></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/contact/">Contact</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/">clhenrick</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/work/">Work</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/about/">About</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/cv/">CV</a></li>
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/talks/">Talks</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/blog/">Blog</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/blog/archive/">Blog Archive</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+
+	<div class="row t30">
+	<div class="medium-8 columns medium-offset-2 end">
+		<article itemscope itemtype="http://schema.org/Article">
+			<header>
+				
+
+				<span itemprop="name">
+					
+					<h1>Using the Module Pattern in Javascript Programming</h1>
+				</span>
+			</header>
+
+
+			
+			<p class="teaser" itemprop="description">
+				The benefits of using the Javascript module programming pattern to build client-side, interactive, web-mapping applications.
+			</p>
+			
+
+			<span itemprop="articleSection">
+			<p>In the past handful of interactive web projects I’ve created I’ve been using the module programming pattern in Javascript to help keep my code efficient, organized, and to avoid polluting the <strong>global name space</strong> (more on that later). Fairly recently a friend of mine asked about how I used the module pattern as he was looking to implement it for an interactive web-map he’s currently building. He forwarded me the <a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">Adequately Good article on the subject</a> written by <a href="https://twitter.com/bcherry">Ben Cherry</a> which inspired me to revisit it and write this blog post.</p>
+
+<p>I was first exposed to the module pattern through my now colleague and then teacher at Parsons, <a href="http://maniartstudio.com/">Mani Nilchiani</a>, while I was taking the “Web Advanced” class during the second semester of my MFA program in the spring of 2014. In the class we did a deep-dive into Javascript; we learned about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures"><strong>closures</strong></a> and how they can be exploited for the module pattern. In his class we used the module pattern to build a simple, database driven, “to-do” list / web app with <a href="https://nodejs.org/">Node.JS</a>. This app was also used to learn the concept of <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"><strong>models</strong> and <strong>views</strong></a>, or the concept of tying data to user interface elements in websites. Through exploring these programming concepts I found that I enjoyed using the module pattern for developing web-projects that use interactive maps.</p>
+
+<p>After reading the Adequately Good article that my colleague sent me I was eager to try out <strong>loose augmentation</strong> with the module pattern. Prior to this I had used <strong>sub-modules</strong> which worked fairly well, though felt like at times it made my code overly complex. Perhaps <strong>loose augmentation</strong> would be a simpler or easier to implement.</p>
+
+<p>As an example I’ll show how using <strong>loose augmentation</strong> has been working well for a data-viz / web-mapping project that I’m current working on with some other folks, <a href="https://github.com/NYC-REIC/interactive">Landscapes of Profit</a>. (<em>side note: You can learn more about the project’s motivation and methodology at <a href="http://www.landscapesofprofit.com">landscapesofprofit.com</a></em>). I’ll also show how I used <strong>sub-modules</strong> for a project I created previously, <a href="http://www.bushwickcommunitymap.org">The Bushwick Community Map</a>.</p>
+
+<h2 id="the-module-pattern">The Module Pattern</h2>
+<p>I’ll start by showing an example of wrapping an <strong>anonymous function</strong> in <code class="highlighter-rouge">()</code>’s, aka a <strong>closure</strong>, which tells Javascript to call the function as soon as the script has been loaded. Right now this may seem a little abstract, but the benefit of doing this becomes more apparent as we move to the module pattern in this next example.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// all our code goes in here...</span>
+    <span class="c1">// the following won't be accessible </span>
+    <span class="c1">// outside of this anonymous function</span>
+    <span class="kd">var</span> <span class="nx">myPrivateVariable</span> <span class="o">=</span> <span class="s2">"hi!"</span><span class="p">;</span>
+
+    <span class="kd">function</span> <span class="nx">logVar</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myPrivateVariable</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">logVar</span><span class="p">();</span>
+
+<span class="p">})();</span>
+
+<span class="c1">// output from the console:</span>
+<span class="c1">// "hi!"</span></code></pre></figure>
+
+<p>The next step involves assigning the closure to a variable, what you might decide to call <code class="highlighter-rouge">app</code> (a naming convention that others reading your code will likely understand). This example, like the previous, uses another closure (function wrapped in <code class="highlighter-rouge">()</code>’s) which tells Javascript to call the function as soon as the script has been loaded. Again, all variables and functions declared inside the <code class="highlighter-rouge">app</code> are <strong>private</strong> or <em>not accessible</em> outside of <code class="highlighter-rouge">the function</code>, unless they are <strong>returned</strong> by the function.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// "my" is an object that will contain our public variables</span>
+    <span class="c1">// we will add things to this and return it at the end</span>
+    <span class="kd">var</span> <span class="nx">my</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="kd">var</span> <span class="nx">myPrivateVariable</span> <span class="o">=</span> <span class="s2">"hi!"</span><span class="p">;</span>
+
+    <span class="c1">// this next variable will be accessible as we return it</span>
+    <span class="nx">my</span><span class="p">.</span><span class="nx">publicVariable</span> <span class="o">=</span> <span class="s2">"waz up???"</span>
+
+    <span class="kd">function</span> <span class="nx">logPrivate</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myPrivateVariable</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">logPrivate</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nx">my</span><span class="p">;</span>
+
+<span class="p">})();</span>
+
+<span class="c1">// in the console the following is displayed, </span>
+<span class="c1">// a result of calling logPrivate() in our app:</span>
+<span class="c1">// hi!</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">publicVariable</span><span class="p">);</span>
+<span class="c1">// returns: "waz up!"</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myPrivateVariable</span><span class="p">);</span>
+<span class="c1">// returns: Uncaught ReferenceError: myPrivateVariable is not defined</span></code></pre></figure>
+
+<p>If we load our code in a browser, bust open our javascript console, and type in <code class="highlighter-rouge">app.</code> we see that we have access to <code class="highlighter-rouge">publicVariable</code> but not <code class="highlighter-rouge">myPrivateVariable</code>. This is because we <strong>exported</strong> the <code class="highlighter-rouge">publicVariable</code> by attaching it to the object <code class="highlighter-rouge">my</code> and then returning <code class="highlighter-rouge">my</code> at the end of the code inside our function. The <code class="highlighter-rouge">myPrivateVariable</code> variable stays hidden within our <code class="highlighter-rouge">app</code> and cannot be referenced outside of the <code class="highlighter-rouge">app</code>.</p>
+
+<p>This helps accomplish one of the “best practices” of programming in javascript for the web, avoiding having lots of <strong>global variables</strong> or worse yet <strong>implied globals</strong>. (An implied global is what you get when you first declare a variable without the <code class="highlighter-rouge">var</code> in front, something to pretty much always avoid doing.)</p>
+
+<p>We can also import globals into our module as well and act on them:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="nx">d</span><span class="p">,</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">my</span> <span class="o">=</span> <span class="p">{};</span>
+
+    <span class="kd">var</span> <span class="nx">myPrivateVariable</span> <span class="o">=</span> <span class="s2">"hi!"</span><span class="p">;</span>
+
+    <span class="c1">// these next variables will be accessible as </span>
+    <span class="c1">// we return them in the `my` object</span>
+    <span class="nx">my</span><span class="p">.</span><span class="nx">$body</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">);</span>
+    <span class="nx">my</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="nx">w</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span>
+    <span class="nx">my</span><span class="p">.</span><span class="nx">divs</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nx">my</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">jQuery</span><span class="p">);</span>
+
+<span class="c1">// use the public "$body" variable to create an h1 tag in </span>
+<span class="c1">// the DOM's body element that contains the text "Hello World!"</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">$body</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">'&lt;h1&gt;Hello World!&lt;/h1&gt;'</span><span class="p">);</span></code></pre></figure>
+
+<p>Here we are importing three <strong>global</strong> objects, <strong>aliasing them</strong>, and using them in our module. This method is clearer, faster, and less prone to bugs than using lots of global variables, which can make it difficult to isolate and reuse our code in new contexts. It also lets us shorten (or <strong>alias</strong>) names for imported globals if we need to, eg: <code class="highlighter-rouge">window</code> can be aliased as <code class="highlighter-rouge">w</code> for short. Another reason I like this pattern is that it lets me keep track of what globals I’m using in each of my modules, kind of like the <code class="highlighter-rouge">require()</code> method in Node.JS. Not to mention you don’t need a third party library to implement it. Though if you are used to using Node.JS then <a href="http://browserify.org/">Browserify</a> is super helpful for importing Node modules in your client side Javascript.</p>
+
+<h2 id="loose-augmentation-vs-sub-modules">Loose Augmentation vs. Sub Modules</h2>
+<p>Now back to the original point of writing this post! Previously I used the <strong>sub-module</strong> method with the module pattern. In the following example assume each time  <code class="highlighter-rouge">var app = app || {};</code>  is stated it is referring to the start of another file.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// app.map.js</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span> <span class="o">||</span> <span class="p">{};</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span><span class="nx">CDB</span><span class="p">,</span> <span class="nx">L</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// all of our code for "map" here</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">,</span> <span class="nx">cartodb</span><span class="p">,</span> <span class="nx">L</span><span class="p">);</span>
+
+<span class="c1">//------ new file ------</span>
+<span class="c1">// app.gui.js</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">app</span> <span class="o">||</span> <span class="p">{};</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">gui</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="nx">d</span><span class="p">,</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">// all of our code for the GUI here </span>
+<span class="p">})(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">jQuery</span><span class="p">);</span></code></pre></figure>
+
+<p>In this example <code class="highlighter-rouge">app.map</code> and <code class="highlighter-rouge">app.gui</code> are in two separate files and contain the code for the map and user interface respectively. This is helpful when we are creating a more complex app and don’t want to end up with an insanely long Javascript file. Instead we split our code into separate modules, each module lives in a separate file. The sub-module method works fairly well but I found that I wanted to try <strong>loose augmentation</strong> for my most recent project, <a href="https://github.com/nyc-reic/interactive/">Landscapes of Profit</a>. Here’s an example of using loose augmentation:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">$</span><span class="p">){</span>
+    
+    <span class="nx">parent</span><span class="p">.</span><span class="nx">myMethod</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// a method that does something related to this module...</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nx">app</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">jQuery</span><span class="p">);</span></code></pre></figure>
+
+<p><strong>Loose augmentation</strong> works by declaring the variable <code class="highlighter-rouge">app</code> when we define our module function, rather than declaring it beforehand with <code class="highlighter-rouge">var app = app || {};</code>. We also import our app via <code class="highlighter-rouge">app || {}</code> into our module and alias it as <code class="highlighter-rouge">parent</code>. Like the earlier examples this allows us to “augment” or add things to our <code class="highlighter-rouge">app</code>, similar how we did with declaring <code class="highlighter-rouge">var my = {};</code> and returning it at the end. I’ve found that the benefit of this approach is that it seems to work a little better with Javascript’s asynchronous nature. I ran into a problem with the sub-module pattern in coding <a href="https://github.com/clhenrick/am-i-rent-stabilized">Am I Rent Stabilized?</a> where all my modules had to load in a very specific order. The approach demonstrated above seems to be a little more flexible.</p>
+
+<p>In both approaches (loose augmentation and sub-modules) I’ve found it useful to first create one module that contains all variables that will likely need to be referenced from all other modules. As some of the variables will be created at a later point in time they are initially set to <code class="highlighter-rouge">null</code>. This helps with debugging as well, as if I get an error saying that a variable is <code class="highlighter-rouge">null</code> I know I haven’t assigned it properly as javascript’s default behavior is to set a variable to <code class="highlighter-rouge">undefined</code> if it hasn’t been declared.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// app.el.js</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">L</span><span class="p">,</span> <span class="nx">cartodb</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// "el" is just an object we store our "public" variables in </span>
+  <span class="c1">// so we can pass them between modules</span>
+  <span class="nx">parent</span><span class="p">.</span><span class="nx">el</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">baselayer</span> <span class="p">:</span> <span class="k">new</span> <span class="nx">L</span><span class="p">.</span><span class="nx">StamenTileLayer</span><span class="p">(</span><span class="s2">"toner-lite"</span><span class="p">),</span>
+    <span class="na">sql</span> <span class="p">:</span> <span class="k">new</span> <span class="nx">cartodb</span><span class="p">.</span><span class="nx">SQL</span><span class="p">({</span> <span class="na">user</span><span class="p">:</span> <span class="s1">'chenrick'</span> <span class="p">}),</span>
+    <span class="na">taxLots</span> <span class="p">:</span> <span class="s2">"nyc_flips_pluto_150712"</span><span class="p">,</span>
+    <span class="na">url</span> <span class="p">:</span> <span class="nx">w</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">,</span>
+    <span class="na">hashurl</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">map</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">layerSource</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">cdbOptions</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">dataLayer</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">queriedData</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">sum</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">tax</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">cartocss</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">featGroup</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">bounds</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">center</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">topPoint</span> <span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="na">centerPoint</span> <span class="p">:</span> <span class="kc">null</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nx">app</span> <span class="o">||</span> <span class="p">{},</span> <span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">jQuery</span><span class="p">,</span> <span class="nx">L</span><span class="p">,</span> <span class="nx">cartodb</span><span class="p">);</span></code></pre></figure>
+
+<p>Then we create another module that contains all the logic for creating the map using Leaflet.JS and adding our geospatial data layer with CartoDB.JS.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// app.map.js</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">$</span><span class="p">,</span> <span class="nx">L</span><span class="p">,</span> <span class="nx">cartodb</span><span class="p">){</span>
+  <span class="c1">// sets up the Leaflet Map and loads the data layer from CartoDB</span>
+  
+  <span class="c1">// reassign the name of our "public" variable container </span>
+  <span class="c1">// so that it is easier to reference in our code</span>
+  <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">el</span><span class="p">;</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
+
+  <span class="nx">parent</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="na">init</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">//  map.init() will be called to create our map</span>
+      <span class="c1">// parameters to pass to Leaflet, such as the map center and zoom</span>
+      <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">center</span> <span class="p">:</span> <span class="p">[</span><span class="mf">40.694631</span><span class="p">,</span><span class="o">-</span><span class="mf">73.925028</span><span class="p">],</span>
+        <span class="na">minZoom</span> <span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+        <span class="na">maxZoom</span> <span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+        <span class="na">zoom</span> <span class="p">:</span> <span class="mi">15</span><span class="p">,</span> 
+        <span class="na">zoomControl</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">infoControl</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">attributionControl</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">};</span>
+
+      <span class="nx">el</span><span class="p">.</span><span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">L</span><span class="p">.</span><span class="nx">Map</span><span class="p">(</span><span class="s1">'map'</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+      <span class="nx">el</span><span class="p">.</span><span class="nx">baselayer</span><span class="p">.</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">map</span><span class="p">);</span>
+      <span class="nx">el</span><span class="p">.</span><span class="nx">featureGroup</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">featureGroup</span><span class="p">().</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">map</span><span class="p">);</span>
+      <span class="nx">app</span><span class="p">.</span><span class="nx">map</span><span class="p">.</span><span class="nx">getCartoDB</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">map</span><span class="p">);</span>
+
+      <span class="k">new</span> <span class="nx">L</span><span class="p">.</span><span class="nx">Control</span><span class="p">.</span><span class="nx">Zoom</span><span class="p">({</span> <span class="na">position</span><span class="p">:</span> <span class="s1">'bottomright'</span> <span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">map</span><span class="p">);</span>    
+    <span class="p">},</span>
+
+    <span class="na">getCartoDB</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// cartodb layer settings for the taxlot data</span>
+      <span class="nx">el</span><span class="p">.</span><span class="nx">layerSource</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">user_name</span> <span class="p">:</span> <span class="s2">"chenrick"</span><span class="p">,</span>
+          <span class="na">type</span> <span class="p">:</span> <span class="s2">"cartodb"</span><span class="p">,</span>
+          <span class="na">sublayers</span> <span class="p">:</span> <span class="p">[{</span>
+              <span class="na">sql</span> <span class="p">:</span> <span class="s2">"SELECT * FROM "</span> <span class="o">+</span> <span class="nx">el</span><span class="p">.</span><span class="nx">taxLots</span><span class="p">,</span>
+              <span class="na">cartocss</span> <span class="p">:</span> <span class="nx">el</span><span class="p">.</span><span class="nx">cartocss</span><span class="p">.</span><span class="nx">taxLots</span><span class="p">,</span>
+              <span class="na">interactivity</span><span class="p">:</span> <span class="s2">""</span>
+          <span class="p">}]</span>
+      <span class="p">};</span>
+
+      <span class="c1">// cartodb layer params</span>
+      <span class="nx">el</span><span class="p">.</span><span class="nx">cdbOptions</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="na">cartodb_logo</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">legends</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+          <span class="na">https</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="na">attributionControl</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">};</span>
+
+      <span class="c1">// create the cartodb layer and add it to the map</span>
+      <span class="nx">cartodb</span><span class="p">.</span><span class="nx">createLayer</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">el</span><span class="p">.</span><span class="nx">layerSource</span><span class="p">,</span> <span class="nx">el</span><span class="p">.</span><span class="nx">cdbOptions</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'done'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">layer</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">layer</span><span class="p">.</span><span class="nx">setZIndex</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// make sure the cartodb layer is on top</span>
+              <span class="nx">el</span><span class="p">.</span><span class="nx">dataLayer</span> <span class="o">=</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">getSubLayer</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+          <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+
+<span class="p">})(</span><span class="nx">app</span> <span class="o">||</span> <span class="p">{},</span> <span class="nx">jQuery</span><span class="p">,</span> <span class="nx">L</span><span class="p">,</span> <span class="nx">cartodb</span><span class="p">);</span></code></pre></figure>
+
+<p>There are some other modules I won’t go into at the moment, but once I have all of the code set up and working the way I want I usually have a final module that starts up the app when its function is called.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// app.init.js</span>
+
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">){</span>
+  <span class="c1">// start up the app!  </span>
+  <span class="nx">parent</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">splitHash</span><span class="p">();</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">map</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">eventListeners</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+  
+<span class="p">})(</span><span class="nx">app</span> <span class="o">||</span> <span class="p">{});</span></code></pre></figure>
+
+<p>In the bottom of the <code class="highlighter-rouge">&lt;body&gt;</code> tag in the <code class="highlighter-rouge">.html</code> file where I am using the code I add a script that calls <code class="highlighter-rouge">app.init()</code> after all of the DOM content has been loaded.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- the app --&gt;</span>
+<span class="c">&lt;!-- fyi these can all later be bundled into one js file for production --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.el.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.map.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.cartocss.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.circle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.hash.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.events.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.init.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- this script starts the app after the DOM is loaded --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+  <span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<p>If you’d like to browse the source code of apps I’ve written that use either the <strong>loose augmentation</strong> or <strong>sub-module</strong> approach with the module pattern in Javascript see the following Github links:</p>
+
+<ul>
+  <li><a href="https://github.com/nyc-reic/interactive/">Landscapes of Profit</a> :: uses loose augmentation</li>
+  <li><a href="https://github.com/clhenrick/BushwickCommunityMap">Bushwick Community Map</a> :: uses sub-modules</li>
+</ul>
+
+<p>Thanks for reading, and please <a href="http://localhost:4000/contact/">let me know</a> if you have any thoughts on this post or if you found it helpful.</p>
+
+
+			</span>
+
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://clhenrick.io/" target="_blank"> Chris Henrick</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2015-11-15" itemprop="datePublished"> 2015-11-15</time>
+				
+
+				<span class="icon-archive pr20"> </span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> javascript</span> <span class="icon-price-tag pr10"> web-mapping</span> <span class="icon-price-tag pr10"> programming patterns</span> </span>
+			</p>
+
+			<div id="post-nav" class="row">
+				
+				<div class="small-4 columns text-center"><a class="button small radius prev" href="http://localhost:4000/using-cartodb-and-datatables/">&laquo; Using CartoDB for creating data driven web pages</a></div><!-- /.small-4.columns -->
+				
+				<div class="small-4 columns text-center"><a class="radius button small" href="http://localhost:4000/blog/archive/" title="Blog Archive">Archive</a></div><!-- /.small-4.columns -->
+				
+				<div class="small-4 columns text-center"><a class="button small radius next" href="http://localhost:4000/es6-template-strings-sql/">ES6 Template Strings For SQL &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			</div><!--  /.page-meta -->
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+				<div id="disqus_thread"></div>
+				<script>
+				    var disqus_config = function () {
+				        this.page.url =  'http://localhost:4000'
+				        this.page.identifier = '/using-the-js-modular-pattern/';
+								this.page.title = 'Using the Module Pattern in Javascript Programming';
+				    };
+				    (function() {  // DON'T EDIT BELOW THIS LINE
+				        var d = document, s = d.createElement('script');
+
+				        s.src = '//clhenrick.disqus.com/embed.js';
+
+				        s.setAttribute('data-timestamp', +new Date());
+				        (d.head || d.body).appendChild(s);
+				    })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+			
+
+			
+		</article>
+	</div><!-- /.medium-8.columns -->
+
+
+	
+
+
+	
+</div><!-- /.row -->
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      <div id="footer">
+        <div class="row">
+          <div class="medium-6 large-5 columns">
+            <h5 class="shadow-black">About This Site</h5>
+
+            <p class="">
+              The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.
+              <a href="http://localhost:4000/about/">More ›</a>
+            </p>
+          </div><!-- /.large-6.columns -->
+
+
+          <div class="small-6 medium-3 large-3 large-offset-1 columns">
+            
+              
+                <h5 class="shadow-black">Services</h5>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+
+              <ul class="no-bullet shadow-black">
+              
+                
+                  <li >
+                    <a href=""  title=""></a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/contact/"  title="Contact">Contact</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/feed.xml"  title="Subscribe to RSS Feed">RSS</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/atom.xml"  title="Subscribe to Atom Feed">Atom</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/sitemap.xml"  title="Sitemap for Google Webmaster Tools">sitemap.xml</a>
+                  </li>
+              
+              </ul>
+          </div><!-- /.large-4.columns -->
+
+
+          <div class="small-6 medium-3 large-3 columns">
+            
+              
+                <h5 class="shadow-black">Network</h5>
+              
+            
+              
+            
+              
+            
+
+            <ul class="no-bullet shadow-black">
+            
+              
+                <li >
+                  <a href=""  title=""></a>
+                </li>
+            
+              
+                <li class="services-newsletter" >
+                  <a href="http://foundation.zurb.com/" target="_blank"  title="Built on Foundation">Built on Foundation</a>
+                </li>
+            
+              
+                <li class="site-code" >
+                  <a href="https://github.com/clhenrick/portfolio" target="_blank"  title="Code available on Github">Code on Github</a>
+                </li>
+            
+            </ul>
+          </div><!-- /.large-3.columns -->
+        </div><!-- /.row -->
+
+      </div><!-- /#footer -->
+
+
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>
+              Created with &hearts;
+              by&nbsp;<a href="http://clhenrick.io/">Chris&nbsp;Henrick</a>
+              using&nbsp;<a href="http://jekyllrb.com/" target="_blank">Jekyll</a>
+              based&nbsp;on&nbsp;<a href="http://phlow.github.io/feeling-responsive/">Feeling&nbsp;Responsive</a>.
+            </p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="https://github.com/clhenrick" target="_blank" class="icon-github" title="Code"></a></li>
+            
+              <li><a href="https://twitter.com/chrislhenrick" target="_blank" class="icon-twitter" title="Twitter"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+<!-- jQuery -->
+<script src="http://localhost:4000/assets/js/javascript.min.js"></script>
+<!-- lazy load -->
+<script src="http://localhost:4000/assets/js/jquery.lazyload.min.js"></script>
+
+<script type="text/javascript">
+// make all external links open in a new browser tab
+// code credit: https://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+$(function(){
+  $('a').each(function() {
+     var a = new RegExp('/' + window.location.host + '/');
+     if(!a.test(this.href)) {
+         $(this).click(function(event) {
+             event.preventDefault();
+             event.stopPropagation();
+             window.open(this.href, '_blank');
+         });
+     }
+  });
+
+  // lazy load images with class "lazy"
+  $("img.lazy").lazyload({
+    threshold: 200,
+    effect: "fadeIn"
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69968207-1', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+

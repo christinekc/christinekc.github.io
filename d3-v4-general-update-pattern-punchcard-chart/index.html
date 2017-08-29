@@ -1,0 +1,1201 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+		<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>D3JS v4 General Update Pattern: Punchcard Chart</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/styles_feeling_responsive.css" />
+	<script src="http://localhost:4000/assets/js/modernizr.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: [ 'Lato:400,700,400italic:latin', 'Work+Sans:400,700:latin' ]
+      }
+    });
+  </script>
+
+  <noscript>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic|Volkhov' rel='stylesheet' type='text/css' />
+  </noscript>
+
+  <meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA" />
+	
+	<meta name="description" content="Going from static to dynamic via the D3 v4 API" />
+
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729"/>
+
+	
+
+
+
+	
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png" />
+
+
+
+
+	
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png" />	
+
+
+
+
+	
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png" />
+
+
+
+
+	
+	<meta name="msapplication-TileColor" content="#fabb00" />
+
+
+
+	<!-- Facebook Optimization -->
+	<meta property="og:locale" content="en_EN" />
+	
+	<meta property="og:title" content="D3JS v4 General Update Pattern: Punchcard Chart" />
+	<meta property="og:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, &amp; cartography services." />
+	<meta property="og:url" content="http://localhost:4000//d3-v4-general-update-pattern-punchcard-chart/" />
+	<meta property="og:site_name" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography" />
+	
+
+	
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="">
+	<meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA">
+	
+	
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729">
+	
+	
+	<link rel="canonical" href="http://localhost:4000/d3-v4-general-update-pattern-punchcard-chart/">
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@chrislhenrick">
+	<meta name="twitter:creator" content="@chrislhenrick">
+	<meta name="twitter:title" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography">
+	<meta name="twitter:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.">
+	<meta name="twitter:image" content="http://localhost:4000/images/clhenrick-landing-header.jpg">
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000/humans.txt" />
+
+	
+
+	
+</head>
+
+</head>
+<body id="top-of-page" class="">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="show-for-small-only"><a href="http://localhost:4000" class="icon-tree"> Chris Henrick</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="right">
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/search/">Search</a></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/contact/">Contact</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/">clhenrick</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/work/">Work</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/about/">About</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/cv/">CV</a></li>
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/talks/">Talks</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/blog/">Blog</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/blog/archive/">Blog Archive</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+
+	<div class="row t30">
+	<div class="medium-8 columns medium-offset-2 end">
+		<article itemscope itemtype="http://schema.org/Article">
+			<header>
+				
+
+				<span itemprop="name">
+					
+					<h1>D3JS v4 General Update Pattern: Punchcard Chart</h1>
+				</span>
+			</header>
+
+
+			
+			<p class="teaser" itemprop="description">
+				Going from static to dynamic via the D3 v4 API
+			</p>
+			
+
+			<span itemprop="articleSection">
+			<h3 id="toc">TOC</h3>
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#the-static-barley-punchcard-chart">The Static Barley Punchcard</a></li>
+  <li><a href="#about-the-nested-data-structure">About the Nested Data Structure</a></li>
+  <li><a href="#steps-towards-a-dynamic-chart-using-d3-dispatch">Steps Towards a Dynamic Chart Using d3-dispatch</a></li>
+  <li><a href="#setting-up-the-dropdown">Setting Up the Dropdown</a></li>
+  <li><a href="#punchcard-chart-set-up">Punchcard Chart Set Up</a></li>
+  <li><a href="#the-chart-update-callback">The Chart Update Callback</a></li>
+  <li><a href="#implementing-the-general-update-pattern-on-nested-svg-elements">Implementing the General Update Pattern on Nested SVG Elements</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+<p>The most recent project I worked on at <a href="http://stamen.com">Stamen Design</a> involved exploring data for a client using <a href="https://d3js.org">D3JS</a>, which finally gave me a reason to dive into more of version 4 of the API. If you haven’t heard of D3JS, it’s a very powerful javascript library that allows for precise and elegant control over creating interactive data visualizations for the web. The “D3” part stands for “Data Driven Documents”, referring to its ability to bind data to HTML DOM elements, most frequently SVG elements, or through manipulating the HTML Canvas element, then styling and animating said elements computationally. I would encourage you to take a look at the <a href="https://github.com/d3/d3/wiki/Gallery">examples on the D3 homepage</a>, as it will give you an idea of what the possibilities are with D3.</p>
+
+<p>In this blog post I’ll demonstrate the <a href="http://bl.ocks.org/mbostock/3808218">d3 general update pattern</a> through creating a updatable Punchcard chart, while also discussing some of the differences I’ve noticed between D3 v3 and v4. Beginning with a <a href="http://bl.ocks.org/clhenrick/2b6b5360748a06b26bfd50d96998b741">static barley punchcard</a> Block that I forked from <a href="http://bl.ocks.org/syntagmatic">Kai Chang</a>, I’ll show how to add D3 v4’s general update pattern while also throwing in some animations and other goodies. If you’re unfamiliar with them, <strong>Blocks</strong> are the D3 community’s primary method of sharing D3 code examples. There is even a site called <a href="http://blockbuilder.org">Blockbuilder.org</a> which is sort of like a simplified version of <a href="http://codepen.io/">Codepen</a> or <a href="https://jsfiddle.net/">JSFiddle</a>. Blocks are a system originally developed by the creator of D3, Mike Bostock (who has an <a href="https://bl.ocks.org/mbostock">amazing gallery of blocks</a> by the way), to demonstrate D3’s features and concepts. Because Blocks are built on top of <a href="https://gist.github.com/">Github Gists</a>, each Block is version controlled and “forkable”, an added bonus.</p>
+
+<p>I won’t walk through how to set up the punchcard chart from scratch, so if you’re brand new to D3 I would recommend starting with some of the basics before going through this post. The <a href="https://bost.ocks.org/mike/bar/">“Let’s Make a Bar Chart”</a>, and <a href="https://bost.ocks.org/mike/selection/">“How Selections Work”</a> are two worthy reads for beginners, or if you need a quick refresh on D3.</p>
+
+<h3 id="the-static-barley-punchcard-chart">The Static Barley Punchcard Chart</h3>
+<p>Here’s what the Barley Punchcard Chart currently looks like:</p>
+
+<p><img src="/images/barley-punchcard-static.png" alt="static d3 barley punchcard chart" /></p>
+
+<p>The one we’ll be making won’t look terribly different from this. We’ll be adding a simple HTML dropdown (<code class="highlighter-rouge">select</code> element) that will enable a user to choose from different “sites” which will then dynamically update the chart with some animations, or transitions as they’re called in D3.</p>
+
+<p>Punchcard charts work really well for showing change over <em>temporarily consistent intervals</em>, in this case each distinct year from 1927 to 1936. When we attempt to show this data in a line chart for example, the overlap between Barley varieties make them hard to distinguish from one another:</p>
+
+<p><img src="/images/barley-linechart.png" alt="static d3 barley line chart" /></p>
+
+<p>Where as in the punchcard chart the size of each circle allows the user to make a clear comparison between data points. The color scheme simply helps differentiate one variety from the next.</p>
+
+<p>Take note of the various D3 Scales being used in the original chart: <code class="highlighter-rouge">scalePoint</code>, <code class="highlighter-rouge">scaleLinear</code>, <code class="highlighter-rouge">scaleSqrt</code>, and <code class="highlighter-rouge">scaleOrdinal</code>. Each is assigned to a variable which hints at what its purpose will be.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">yscale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scalePoint</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">xscale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleSqrt</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleOrdinal</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">schemeCategory20b</span><span class="p">);</span></code></pre></figure>
+
+<p>Previously in D3 when you created a scale you would do <code class="highlighter-rouge">d3.scale.scaleName()</code>, notice the dot between <code class="highlighter-rouge">scale</code> and <code class="highlighter-rouge">scaleName()</code>. In v4, D3 has been broken into <a href="https://github.com/d3">separate modules</a>, and <a href="https://github.com/d3/d3-scale">d3-scale</a> an example of one such module (Mike Bostock even wrote a <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">Medium article about it</a>). As such, the naming convention for referencing different types of scales in D3 has changed. The general renaming of features is perhaps the biggest difference in D3 v4 from v3 I’ve noticed so far, and the thing that will most likely break your visualization if you attempt to use D3 v4 with code that previously used v3, without making any changes!</p>
+
+<p>Previously in v3 almost all of D3’s parts were contained in one place. Having separate modules allows developers to only use the parts of the d3 codebase they need, rather than importing the D3 library in its entirety while only using a subset of its features. Only importing modules you need helps keep the size of your code to a minimum. However, if you’re unsure of which module(s) to use for a particular visualization it’s okay to load the whole library and then search <a href="https://github.com/d3/d3/blob/master/API.md">the API docs</a> for information on specific features or modules. I’ve found that by Googling the name of a D3 feature, the API docs will forward me to the location of documentation for v4 of that feature which is super helpful (+1 D3 contributors!)</p>
+
+<p>Moving on, the meat of the original punchcard chart happens in the callback function of <code class="highlighter-rouge">d3.csv()</code>, where <code class="highlighter-rouge">data</code> is an argument received by the callback. This argument contains an array of objects, where each object corresponds to a row in the <code class="highlighter-rouge">barleyfull.csv</code> file. Here’s that code block:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">d3</span><span class="p">.</span><span class="nx">csv</span><span class="p">(</span><span class="s1">'barleyfull.csv'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">d</span><span class="p">.</span><span class="k">yield</span> <span class="o">=</span> <span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">;</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="nx">year</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">nested</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">nest</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">site</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">nested</span><span class="p">);</span>
+
+
+  <span class="kd">var</span> <span class="nx">site</span> <span class="o">=</span> <span class="nx">nested</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+
+  <span class="nx">yscale</span>
+    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="p">])</span>
+    <span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="nx">site</span><span class="p">.</span><span class="nx">values</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span> <span class="p">}))</span>
+    <span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+  <span class="nx">xscale</span>
+    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">])</span>
+    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">1927</span><span class="p">,</span> <span class="mi">1936</span><span class="p">]);</span>
+
+  <span class="nx">radius</span>
+    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">;</span> <span class="p">})</span> <span class="p">]);</span>
+
+  <span class="kd">var</span> <span class="nx">yaxis</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">axisLeft</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">yscale</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">xaxis</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">axisBottom</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">tickFormat</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">xscale</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"body"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">datum</span><span class="p">(</span><span class="nx">site</span><span class="p">);</span>
+
+  <span class="nx">chart</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"h2"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="nx">height</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">bottom</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s1">'translate('</span> <span class="o">+</span> <span class="p">[</span><span class="nx">margin</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">top</span><span class="p">]</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">);</span>
+
+  <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">yaxis</span><span class="p">);</span>
+
+  <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"translate(0,"</span> <span class="o">+</span> <span class="nx">height</span> <span class="o">+</span> <span class="s2">")"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">xaxis</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">rows</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"g.row"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">values</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span> <span class="o">+</span> <span class="s2">" row"</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">"translate(0,"</span> <span class="o">+</span> <span class="nx">yscale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span>
+    <span class="p">});</span>
+
+  <span class="nx">rows</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">values</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">radius</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cy"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cx"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">xscale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">year</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">color</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="p">});</span></code></pre></figure>
+
+<p>In order to get from this to a place where we can update our chart with a new subset of the barley data, we will need to do some refactoring. How I love refactoring!</p>
+
+<h3 id="about-the-nested-data-structure">About the Nested Data Structure</h3>
+<p>Notice the hardcoded value <code class="highlighter-rouge">var site = nested[4];</code> towards the top of the above code, this variable references all data associated with the “Morris” site. To make the punchcard chart updatable, we’ll be setting the value of <code class="highlighter-rouge">site</code> from a user interaction with the dropdown.</p>
+
+<p>When the data is first loaded by <code class="highlighter-rouge">d3.csv</code>, it is formatted as an array of objects where each object contains key value pairs that represent a row in our table. Here’s the very first object in that array:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+  </span><span class="err">id:</span><span class="w"> </span><span class="nt">"1"</span><span class="err">,</span><span class="w">
+  </span><span class="err">yield</span><span class="p">:</span><span class="w"> </span><span class="s2">"47.5"</span><span class="p">,</span><span class="w">
+  </span><span class="err">gen</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+  </span><span class="err">year</span><span class="p">:</span><span class="w"> </span><span class="s2">"1927"</span><span class="p">,</span><span class="w">
+  </span><span class="err">site</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>We can see that each key name corresponds to a field name in the header of the csv file, and each key’s value corresponds to a value for that field in a given row. In some cases we can leave our data structure this way, but more often than not when making a visualization with D3 you’ll be doing some data parsing and re-structuring.</p>
+
+<p>Enter <code class="highlighter-rouge">d3.nest</code>, now a method of the <a href="https://github.com/d3/d3-collection">d3-collection</a> module in v4. According to the documentation, <code class="highlighter-rouge">d3.nest</code> lets you group data into a “hierarchal tree structure” by common attributes, similar to an SQL <code class="highlighter-rouge">GROUP BY</code> clause, but allowing for nested groupings. It’s no coincidence that “nesting” data this way works very well for creating nested DOM elements with D3.</p>
+
+<p>Let’s take a look at our nested data:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Duluth"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waseca"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GrandRapids"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morris"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Crookston"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<p><em>Note that <code class="highlighter-rouge">[...]</code> is just a place holder for a non-empty array.</em></p>
+
+<p>We can see that <code class="highlighter-rouge">nested</code> is an array of six objects, and each object has a <code class="highlighter-rouge">key</code> and <code class="highlighter-rouge">values</code> property. Here, each <code class="highlighter-rouge">key</code> represents a unique “site” in our data such as “StPaul”, “Duluth”, “Waseca”, etc. This is the result of:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">d3</span><span class="p">.</span><span class="nx">next</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">site</span><span class="p">;</span> <span class="p">})</span></code></pre></figure>
+
+<p>In the static chart we are using the 5th object in this array, which is for the site “Morris”. The data contained in <code class="highlighter-rouge">values</code> for each of these objects is another array of objects, so let’s check that out too, starting with <code class="highlighter-rouge">values</code> array for “StPaul”:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Glabron"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Svansota"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Velvet"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trebi"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ManxSA"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SAxMan"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+  </span><span class="err">}</span><span class="p">,</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<p><em>Note: <code class="highlighter-rouge">...</code> implies more data, omitted for the sake of brevity.</em></p>
+
+<p>Again, we have an array of objects, with each object containing the properties <code class="highlighter-rouge">key</code> and <code class="highlighter-rouge">values</code>. Each of these object’s <code class="highlighter-rouge">key</code> property represents a barley variety or <code class="highlighter-rouge">gen</code>. This array of objects is the result of the second invocation of <code class="highlighter-rouge">.key()</code> in the <code class="highlighter-rouge">var nested</code> code block:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">;</span> <span class="p">})</span></code></pre></figure>
+
+<p>Notice that the value of each <code class="highlighter-rouge">key</code> property matches a name in the y axis for our punchcard chart <em>(hint hint)</em>.</p>
+
+<p>If we dig one level deeper and inspect the <code class="highlighter-rouge">values</code> array of each of these objects, for example <code class="highlighter-rouge">nested[0].values[0].values</code>, we’ll find objects that have the same structure to the objects in <code class="highlighter-rouge">data</code>:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"yield"</span><span class="p">:</span><span class="w"> </span><span class="mf">47.5</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1927</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"yield"</span><span class="p">:</span><span class="w"> </span><span class="mf">32.9</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1928</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"103"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"yield"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.9</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1929</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"171"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"yield"</span><span class="p">:</span><span class="w"> </span><span class="mf">34.1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"gen"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Manchuria"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="mi">1930</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"site"</span><span class="p">:</span><span class="w"> </span><span class="s2">"StPaul"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+      </span><span class="err">}</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span></code></pre></figure>
+
+<p>These objects are used to generate each circle in the punchcard. The value of <code class="highlighter-rouge">year</code> is used to map the circle’s x position to a given year in the x axis, while the value of <code class="highlighter-rouge">yield</code> is mapped to the radius of the circle, with help from <code class="highlighter-rouge">d3.scaleLinear</code> and <code class="highlighter-rouge">d3.scaleSqrt</code> respectively. Our y axis value, <code class="highlighter-rouge">gen</code> isn’t used when creating the circles as their parent SVG group elements have already been positioned on the y axis. We can also see that the all values for <code class="highlighter-rouge">gen</code> are “Manchuria” and all values for <code class="highlighter-rouge">site</code> are “StPaul”, matching the nesting of our data structure. The numbers for each <code class="highlighter-rouge">id</code> further inform us that <code class="highlighter-rouge">d3.nest</code> has re-arranged our data, for if you inspect the array in <code class="highlighter-rouge">data</code> from <code class="highlighter-rouge">d3.csv</code> you’ll see that the values for <code class="highlighter-rouge">id</code> increase sequentially by a factor of 1 starting at 1, or the equivalent of an object’s index + 1.</p>
+
+<p>In our code above leaving the data as a nested data structure works well, but what if we want to select a new site via a dropdown interaction? Say the user chooses “Duluth”, how would we use that string to get the correct object for that site’s data? We’d have to use a filter function to pull out the data like so:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">nextSiteName</span> <span class="o">=</span> <span class="s2">"Duluth"</span><span class="p">;</span>
+
+<span class="nx">nested</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span> <span class="o">===</span> <span class="nx">nextSiteName</span><span class="p">;</span>
+<span class="p">})[</span><span class="mi">0</span><span class="p">];</span></code></pre></figure>
+
+<p>Notice the <code class="highlighter-rouge">[0]</code> tacked on at the very end. That’s because <code class="highlighter-rouge">Array.prototype.filter</code> returns a new array, and we want the only object within that array. This code isn’t bad, but we could make things cleaner by using <code class="highlighter-rouge">d3.map</code>. This will achieve the same result by simply calling <code class="highlighter-rouge">map.get("Duluth")</code>, where <code class="highlighter-rouge">map</code> represents our instance of <code class="highlighter-rouge">d3.map</code>. We create the map using our nested data structure like so:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">nested</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span> <span class="p">});</span></code></pre></figure>
+
+<p>This line of code tells d3 to key our data on the site names, everything else will remain nested as before. This method is similar to creating an object with keys for each site name, but <a href="https://github.com/d3/d3-collection#map">with some additional benefits</a>.</p>
+
+<h3 id="steps-towards-a-dynamic-chart-using-d3-dispatch">Steps Towards a Dynamic Chart Using d3-dispatch</h3>
+<p>Okay let’s get down to refactoring! We’ll need a way of communicating from our dropdown to our punchcard chart when the user selects a new site. If you’ve used jQuery before, you might be familiar with creating custom events that you can emit and subscribe to. D3 has something similar, called <a href="https://github.com/d3/d3-dispatch">d3-dispatch</a>, which let’s you register custom events, then emit them and subscribe to them via <code class="highlighter-rouge">dispatch.call</code> and <code class="highlighter-rouge">dispatch.on</code>.</p>
+
+<p>First let’s create a new instance of <code class="highlighter-rouge">d3.dispatch</code> with events for when our data finishes loading and when a user selects a new site via the (soon to be) dropdown:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="s2">"statechange"</span><span class="p">);</span></code></pre></figure>
+
+<p>We’ll also set a variable for the first site we want displayed to the user. To match the static punchcard chart I’ll choose “Morris”:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">firstSiteName</span> <span class="o">=</span> <span class="s2">"Morris"</span><span class="p">;</span></code></pre></figure>
+
+<p>Note that <code class="highlighter-rouge">dispatch</code> and <code class="highlighter-rouge">firstSiteName</code> will be our only “global” variables, the rest of our code will be scoped within callback functions of <code class="highlighter-rouge">dispatch.on()</code> and <code class="highlighter-rouge">dispatch.call()</code>.</p>
+
+<p>Now, let’s rewrite our <code class="highlighter-rouge">d3.csv</code> code block with just the code we need to structure our data. At the end we’ll emit, or call, our two events, “load” and “statechange”. The first event will be used to set up our dropdown and chart while the second will trigger the dropdown to be set and chart to update.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// load our data! When done call our dispatch events with corresponding data</span>
+<span class="nx">d3</span><span class="p">.</span><span class="nx">csv</span><span class="p">(</span><span class="s1">'barleyfull.csv'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="k">throw</span> <span class="nx">error</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="c1">// coerce values for yield and year to be numeric</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">d</span><span class="p">.</span><span class="k">yield</span> <span class="o">=</span> <span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">;</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="nx">year</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="c1">// nest our data on `site` and then on `gen`</span>
+  <span class="kd">var</span> <span class="nx">nested</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">nest</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">site</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">key</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">;</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+  <span class="c1">// construct a new d3 map, not as in geographic map,</span>
+  <span class="c1">// but more like a "hash"</span>
+  <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">nested</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="c1">// call our dispatch events with `this` context, and corresponding data</span>
+  <span class="nx">dispatch</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">"load"</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">map</span><span class="p">);</span>
+  <span class="nx">dispatch</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="s2">"statechange"</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">firstSiteName</span><span class="p">));</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>Notice in this case <code class="highlighter-rouge">dispatch.call</code> receives three arguments:</p>
+
+<ol>
+  <li>the name of event, as a string</li>
+  <li>the <code class="highlighter-rouge">this</code> context</li>
+  <li>any additional arguments, such as data we want to pass along</li>
+</ol>
+
+<h3 id="setting-up-the-dropdown">Setting Up the Dropdown</h3>
+<p>Next, let’s create our dropdown or <code class="highlighter-rouge">select</code> element, once the data has loaded and our <code class="highlighter-rouge">"load"</code> event has been fired.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// register a listener for "load" and create a dropdown / select element</span>
+<span class="nx">dispatch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"load.menu"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// create select dropdown, attach a native DOM event listener "change"</span>
+  <span class="c1">// that will invoke dispatch.call with a "statechange" event</span>
+  <span class="kd">var</span> <span class="nx">select</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"body"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"select"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"change"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">site</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="nx">dispatch</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span>
+          <span class="s2">"statechange"</span><span class="p">,</span>
+          <span class="k">this</span><span class="p">,</span>
+          <span class="nx">map</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">site</span><span class="p">)</span>
+        <span class="p">);</span>
+      <span class="p">});</span>
+
+  <span class="c1">// append options to select dropdown</span>
+  <span class="nx">select</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"option"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">map</span><span class="p">.</span><span class="nx">keys</span><span class="p">().</span><span class="nx">sort</span><span class="p">())</span>
+    <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"option"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">;</span> <span class="p">})</span>
+      <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="c1">// set the current dropdown option to the value of the last statechange</span>
+  <span class="nx">dispatch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"statechange.menu"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">site</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">select</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="nx">site</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></code></pre></figure>
+
+<p>Notice that the first argument to <code class="highlighter-rouge">dispatch.on</code> is a named spaced reference to the <code class="highlighter-rouge">"load"</code> event, <code class="highlighter-rouge">"load.menu"</code>. Name spacing events in <code class="highlighter-rouge">d3.dispatch</code> allows us to register separate callbacks to a single event every time that event is fired. This will make more sense when we set up the chart in a little bit.</p>
+
+<p>The second argument of <code class="highlighter-rouge">dispatch.on</code> is a callback function which receives <code class="highlighter-rouge">map</code> as a parameter. This is because we specified <code class="highlighter-rouge">map</code> as the third argument to <code class="highlighter-rouge">dispatch.call("load")</code>. We can now use our <code class="highlighter-rouge">map</code> data structure to create our dropdown / <code class="highlighter-rouge">select</code> element.</p>
+
+<p>After appending a <code class="highlighter-rouge">select</code> element to the body of the DOM, we register an event listener called <code class="highlighter-rouge">"change"</code>. In the callback of <code class="highlighter-rouge">.on("change")</code> we tell D3 to invoke <code class="highlighter-rouge">dispatch.call</code> with the values <code class="highlighter-rouge">"statechange"</code>, <code class="highlighter-rouge">this</code>, and <code class="highlighter-rouge">map.get(site)</code>. This block of code will run when the user selects a new site from the dropdown and is what will eventually trigger our punchcard chart to update.</p>
+
+<p>In the next code block we create the <code class="highlighter-rouge">option</code> elements which reside within our <code class="highlighter-rouge">select</code> element. The data for our <code class="highlighter-rouge">option</code> elements are the unique site names, which we can retrieve as an array by calling <code class="highlighter-rouge">map.keys()</code>. We chain <code class="highlighter-rouge">.sort()</code> on at the end so that the site names appear in alphabetical order. If we logged this data we would see the following:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">[</span><span class="s2">"Crookston"</span><span class="p">,</span> <span class="s2">"Duluth"</span><span class="p">,</span> <span class="s2">"GrandRapids"</span><span class="p">,</span> <span class="s2">"Morris"</span><span class="p">,</span> <span class="s2">"StPaul"</span><span class="p">,</span> <span class="s2">"Waseca"</span><span class="p">]</span></code></pre></figure>
+
+<p>In other words, <code class="highlighter-rouge">map.keys()</code> returns an array of strings for all our map’s keys.</p>
+
+<p>We then append <code class="highlighter-rouge">option</code> elements for each of these site names, setting the <code class="highlighter-rouge">value</code> attribute and inner <code class="highlighter-rouge">text</code> to the site name. The <code class="highlighter-rouge">value</code> attribute is important as it is used in <code class="highlighter-rouge">map.get()</code> to grab the correct part of our data we need, then passed to <code class="highlighter-rouge">dispatch.call("statechange")</code> within the <code class="highlighter-rouge">select</code>’s <code class="highlighter-rouge">on.("change")</code> event listener.</p>
+
+<p>Finally we need to make sure that the dropdown stays set on the last option the user selected. We do this by setting the current <code class="highlighter-rouge">option</code> in the <code class="highlighter-rouge">select</code> element to match the key of the current site data after <code class="highlighter-rouge">"statechange"</code> is fired. Remember that the data being passed on <code class="highlighter-rouge">"statechange"</code> is an object that has the site name stored in the property <code class="highlighter-rouge">key</code> and its corresponding nested data stored in the property <code class="highlighter-rouge">values</code>.</p>
+
+<p>E.g., for the site “Morris” the object looks like:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">key</span><span class="p">:</span> <span class="s2">"Morris"</span><span class="p">,</span>
+  <span class="nx">values</span><span class="err">:</span> <span class="p">[...]</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="punchcard-chart-set-up">Punchcard Chart Set Up</h3>
+
+<p>Let’s move on to making the punchcard chart. First we’ll do the set up: specifying margins and dimensions, setting the domain and range of scales, instantiating the y and x axis creators, appending an SVG with a main group element, and appending the axises:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// set up our punchcard chart after our data loads</span>
+<span class="nx">dispatch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"load.chart"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// layout properties</span>
+   <span class="kd">var</span> <span class="nx">margin</span> <span class="o">=</span> <span class="p">{</span> <span class="na">top</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="na">right</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">bottom</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="na">left</span><span class="p">:</span> <span class="mi">120</span> <span class="p">};</span>
+   <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="mi">800</span> <span class="o">-</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">left</span> <span class="o">-</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+   <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">600</span> <span class="o">-</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">top</span> <span class="o">-</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+
+   <span class="c1">// scales for axises &amp; circles</span>
+   <span class="kd">var</span> <span class="nx">yScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scalePoint</span><span class="p">();</span> <span class="c1">// ordinal scale for gen type / category</span>
+   <span class="kd">var</span> <span class="nx">xScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">();</span> <span class="c1">// since we are just dealing with years, a linear scale will suffice</span>
+   <span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleSqrt</span><span class="p">();</span> <span class="c1">// circle size would be too large if we used raw values, so we compute their square root</span>
+   <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleOrdinal</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">schemeCategory20b</span><span class="p">);</span> <span class="c1">// colors used for differentiating "gen" type</span>
+
+   <span class="c1">// set up yScale, hold off on setting the domain</span>
+   <span class="nx">yScale</span>
+     <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="p">])</span>
+     <span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+   <span class="c1">// domain for our x scale is min - 1 &amp; max years of the data set</span>
+   <span class="nx">xScale</span>
+     <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">])</span>
+     <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">1926</span><span class="p">,</span> <span class="mi">1936</span><span class="p">]);</span>
+
+   <span class="c1">// domain of circle radius is from 0 to max d.yield</span>
+   <span class="nx">radius</span>
+     <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+     <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">76</span><span class="p">]);</span>
+
+   <span class="c1">// d3.v4 method of setting up axises: axisLeft, axisBottom, etc.</span>
+   <span class="kd">var</span> <span class="nx">yAxis</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">axisLeft</span><span class="p">()</span>
+     <span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">yScale</span><span class="p">);</span>
+
+   <span class="kd">var</span> <span class="nx">xAxis</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">axisBottom</span><span class="p">()</span>
+     <span class="p">.</span><span class="nx">tickFormat</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">;</span> <span class="p">})</span>
+     <span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">xScale</span><span class="p">);</span>
+
+   <span class="c1">// create an svg element to hold our chart parts</span>
+   <span class="kd">var</span> <span class="nx">svg</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"body"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">'svg'</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'width'</span><span class="p">,</span> <span class="nx">width</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">left</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">right</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'height'</span><span class="p">,</span> <span class="nx">height</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">top</span> <span class="o">+</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">bottom</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s1">'g'</span><span class="p">)</span>
+       <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">'transform'</span><span class="p">,</span> <span class="s1">'translate('</span> <span class="o">+</span> <span class="p">[</span><span class="nx">margin</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">margin</span><span class="p">.</span><span class="nx">top</span><span class="p">]</span> <span class="o">+</span> <span class="s1">')'</span><span class="p">)</span>
+
+   <span class="c1">// append svg groups for the axises, then call their corresponding axis function</span>
+   <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"y axis"</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">yAxis</span><span class="p">);</span>
+
+   <span class="nx">svg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"translate(0,"</span> <span class="o">+</span> <span class="nx">height</span> <span class="o">+</span> <span class="s2">")"</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">xAxis</span><span class="p">);</span>
+
+<span class="p">});</span></code></pre></figure>
+
+<p>Similar to <code class="highlighter-rouge">"load.menu"</code>, here we use the name space <code class="highlighter-rouge">"load.chart"</code> to ensure that our chart generating callback is invoked when <code class="highlighter-rouge">"load"</code> is fired. Within the callback we get <code class="highlighter-rouge">map</code> as a parameter, but we don’t actually need to use it here. This is because we can set up our x, y, and radius scales, x and y axis creators, svg with a main group element, and child group elements for our axises. The only scale we haven’t set a domain for yet is our y scale, which we’ll do in our chart update callback function. A quick note that I hard coded values for the domains of the x and radius scales to simplify things a bit.</p>
+
+<p>We now have our chart set up, and it’s hungry for some data!</p>
+
+<h3 id="the-chart-update-callback">The Chart Update Callback</h3>
+
+<p>Next we’ll add the code which utilizes D3’s general update pattern to add data to the punchcard chart. This will first happen within the <code class="highlighter-rouge">d3.csv</code> callback’s <code class="highlighter-rouge">dispatch.call("statechange")</code>, and then each time a new site is chosen from the dropdown. Note that this code lives within the scope of the callback to <code class="highlighter-rouge">d3.on("statechange.chart")</code>, right below where we append the svg group for the x axis.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// register a callback to be invoked which updates the chart when "statechange" occurs</span>
+<span class="nx">dispatch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">"statechange.chart"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">site</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// our transition, will occur over 750 milliseconds</span>
+  <span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">transition</span><span class="p">().</span><span class="nx">duration</span><span class="p">(</span><span class="mi">750</span><span class="p">);</span>
+
+  <span class="c1">// update our yScale &amp; transition the yAxis, note the xAxis doesn't change</span>
+  <span class="nx">yScale</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="nx">site</span><span class="p">.</span><span class="nx">values</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span> <span class="p">}).</span><span class="nx">sort</span><span class="p">());</span>
+  <span class="nx">yAxis</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">yScale</span><span class="p">);</span>
+  <span class="nx">t</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"g.y.axis"</span><span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">yAxis</span><span class="p">);</span>
+
+  <span class="c1">// bind our new piece of data to our svg element</span>
+  <span class="c1">// could also do: svg.data([site.values]);</span>
+  <span class="nx">svg</span><span class="p">.</span><span class="nx">datum</span><span class="p">(</span><span class="nx">site</span><span class="p">.</span><span class="nx">values</span><span class="p">);</span>
+
+  <span class="c1">// tell d3 we want svg groups for each of our gen categories</span>
+  <span class="kd">var</span> <span class="nx">gens</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"g.gen-row"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="c1">// get rid of the old ones we don't need when doing an update</span>
+  <span class="nx">gens</span><span class="p">.</span><span class="nx">exit</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+
+  <span class="c1">// update existing ones left over</span>
+  <span class="nx">gens</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"gen-row"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">"translate(0,"</span> <span class="o">+</span> <span class="nx">yScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span>
+    <span class="p">});</span>
+
+  <span class="c1">// create new ones if our updated dataset has more then the previous</span>
+  <span class="nx">gens</span><span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"g"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"gen-row"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">"translate(0,"</span> <span class="o">+</span> <span class="nx">yScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span>
+    <span class="p">});</span>
+
+  <span class="c1">// reselect the gen groups, so that we get any new ones that were made</span>
+  <span class="c1">// our previous selection would not contain them</span>
+  <span class="nx">gens</span> <span class="o">=</span> <span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"g.gen-row"</span><span class="p">);</span>
+
+  <span class="c1">// tell d3 we want some circles!</span>
+  <span class="kd">var</span> <span class="nx">circles</span> <span class="o">=</span> <span class="nx">gens</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">values</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="c1">// get rid of ones we don't need anymore, fade them out</span>
+  <span class="nx">circles</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"rgba(255,255,255,0)"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+  <span class="c1">// update existing circles, transition size &amp; fill</span>
+  <span class="nx">circles</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cy"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cx"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">xScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">year</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">radius</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">color</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">);</span> <span class="p">});</span>
+
+  <span class="c1">// make new circles</span>
+  <span class="nx">circles</span><span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cy"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"cx"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">xScale</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">year</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">radius</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="k">yield</span><span class="p">);</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">color</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">gen</span><span class="p">);</span> <span class="p">});</span>
+
+<span class="p">});</span></code></pre></figure>
+
+<p>Here is where the magic happens!</p>
+
+<p>First we’ll create a new transition on the main SVG group and specify that it happen over 750 milliseconds when invoked. We’ll use this same transition in multiple places, within the y scale, SVG groups for each <code class="highlighter-rouge">gen</code>, and the circles.</p>
+
+<p>Now that we have data for our currently selected site, we’ll set the domain of the y scale, reset the the scale of the y axis creator, select the SVG group containing the y axis with our transition <code class="highlighter-rouge">t</code>, and then invoke the y scale on it.</p>
+
+<p>Next we’ll bind our data to the main SVG group element using <code class="highlighter-rouge">svg.datum()</code> instead of <code class="highlighter-rouge">svg.data()</code>. The reason for this is slightly tricky to grasp but I’ll do my best to explain. When we typically select elements in D3, for example by doing</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">svg</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"element"</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span></code></pre></figure>
+
+<p>we are telling d3 to join a single piece of data in an array to each element we are creating. This is a common approach when we are creating multiple elements at a time such as SVG groups, circles, rectangles, labels, etc. However, in this case we are attaching data to a single SVG element and aren’t actually joining data to it, so we’ll use <code class="highlighter-rouge">d3.selection</code>’s <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_datum">datum method</a>.</p>
+
+<p>Alternatively, we could wrap our <code class="highlighter-rouge">site.values</code> within an array and use <code class="highlighter-rouge">selection.data()</code> like so:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">svg</span><span class="p">.</span><span class="nx">data</span><span class="p">([</span><span class="nx">site</span><span class="p">.</span><span class="nx">values</span><span class="p">]);</span></code></pre></figure>
+
+<p>To me using <code class="highlighter-rouge">selection.datum()</code> more clearly states our intention for this case. We aren’t creating multiple SVG elements, just allowing our main SVG group element and its child elements to have access to our data.</p>
+
+<h3 id="implementing-the-general-update-pattern-on-nested-svg-elements">Implementing the General Update Pattern on Nested SVG Elements</h3>
+<p>After our main SVG group selection has access to the data we intend to render, we can create a svg group for each barley variety or <code class="highlighter-rouge">gen</code> as they’re referred to in the data. Not all sites have data for every variety, some have more while some have fewer, so this is a good opportunity to perform the general update pattern. The steps are as follows:</p>
+
+<ol>
+  <li>
+    <p>We “select” all svg group elements with the class <code class="highlighter-rouge">"gen-row"</code> and chain the <code class="highlighter-rouge">.data(function(d) { return d; })</code> method to each of them. This will return an object from the top most <code class="highlighter-rouge">values</code> array of our site data, representing each barley variety, effectively binding that object to the corresponding svg group.</p>
+  </li>
+  <li>
+    <p>We “exit” and then remove any svg groups that are no longer needed by calling <code class="highlighter-rouge">gens.exit().remove();</code>. This happens when the previous site data has more varieties than the current site data. This won’t do anything when the chart first loads, as there are no svg group elements created yet.</p>
+  </li>
+  <li>
+    <p>We “update” any left over svg groups with new data. We position them by adding a <code class="highlighter-rouge">"transform", "translate"</code> attribute with the position returned by passing the <code class="highlighter-rouge">"key"</code> property of the object, which is the variety or <code class="highlighter-rouge">gen</code>, to the y scale. This also does not do anything when the chart first loads, because there is nothing to update yet.</p>
+  </li>
+  <li>
+    <p>Lastly we “enter” or create new svg groups if our new site data has more varieties than the previous site data. This step creates all the svg groups for the site data when the chart first loads as no <code class="highlighter-rouge">"g.gen-row"</code> svg groups exist yet.</p>
+  </li>
+</ol>
+
+<p>A few things to note here, first it’s important that in the update and enter steps above we make sure we are adding the class name <code class="highlighter-rouge">"gen-row"</code> to our svg groups. If we don’t do this, when the chart update pattern occurs, our <code class="highlighter-rouge">gens</code> selection will not contain all of our svg groups, and the update won’t work. We use a class to select only the <code class="highlighter-rouge">gen</code> svg groups so that we don’t select our axises and axis labels as well, which is what would happen if we just did <code class="highlighter-rouge">svg.selectAll("g")</code>.</p>
+
+<p>Second, the <code class="highlighter-rouge">.transition()</code> method is chained right before the svg group is positioned via the <code class="highlighter-rouge">.attr("transform", "translate")</code>, and is passed the <code class="highlighter-rouge">t</code> transition we created earlier. When we want to transition an attribute, say a color, size, or position of an element, we chain <code class="highlighter-rouge">transition()</code> right before chaining whatever it is we want to change. The process of passing <code class="highlighter-rouge">t</code> to <code class="highlighter-rouge">.transition()</code> may seem slightly confusing, as why we would we pass a transition as a parameter to a transition method invocation? The reason is that when <code class="highlighter-rouge">transition()</code> receives <code class="highlighter-rouge">t</code> as a name parameter, it will use the <code class="highlighter-rouge">id</code> of <code class="highlighter-rouge">t</code> to <em>synchronize a transition across multiple selections.</em> This is why when a user selects a new site from the dropdown, the y axis, svg groups, and circles all transition simultaneously over the same time period! Pretty freaking cool, right?</p>
+
+<p>The last part about this that took me a bit to figure out was that upon completing the general update pattern for our svg groups, we need to <em>reselect them before making the circles.</em> Why would we do this? Because if we don’t reselect them, and there are more svg groups then there were previously, the groups that were added won’t end up with circles because they aren’t included in the original <code class="highlighter-rouge">gens</code> selection. If that doesn’t make sense, try commenting out the line where we reselect all of the <code class="highlighter-rouge">g.gen-row</code>s and see what happens when you select a new site via the dropdown.</p>
+
+<p>We can use the same select, exit, update, and enter pattern for the circles. Note that here when we bind data to the circles we return <code class="highlighter-rouge">d.values</code>:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">circles</span> <span class="o">=</span> <span class="nx">gens</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">values</span><span class="p">;</span> <span class="p">});</span></code></pre></figure>
+
+<p>This tells d3 to use the array of objects that contain data for each circle, the inner most nested <code class="highlighter-rouge">values</code> array in our <code class="highlighter-rouge">map</code> data structure. If this is confusing I’d recommend you take a look again at the data structure section of this post and see if you can match up where each nested part of the data lines up with the code. Try to work backwards from the inner most array where the circles are, all the way back to where the dropdown is.</p>
+
+<p>One nice trick to transition out the circles that are not required for new site data is to fade them out. I accomplished this by chaining a <code class="highlighter-rouge">.transition()</code> and then setting the fill attribute to be transparent and white, so that it appears the dots fade into the background. It also helps prevent smaller dots appearing inside larger dots, when new larger dots overlap with old smaller dots.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">circles</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">transition</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"fill"</span><span class="p">,</span> <span class="s2">"rgba(255,255,255,0)"</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">remove</span><span class="p">();</span></code></pre></figure>
+
+<p>In both the circles’ update and enter code blocks, I add the transition just before the radius and fill are set. You could also add it before the x position is set, but I prefer to not go too overboard with transitions.</p>
+
+<p>The complete example can be viewed at the following Block, <a href="http://bl.ocks.org/clhenrick/5394591a62a5e61fb8753c1dca13db47">Barley Punchcard – Dynamic</a>.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>So this ended up being a much longer blog post than I originally anticipated! But I think it was worth it to cover a lot, including:</p>
+
+<ul>
+  <li>d3-collection: d3.nest, d3.map</li>
+  <li>d3-dispatch</li>
+  <li>d3-scale</li>
+  <li>d3-transition</li>
+  <li>d3-selection: datum vs data, select, selectAll, exit, update, enter</li>
+</ul>
+
+<p>Hopefully this post helps make sense of why nested data structures work well with D3’s technique of hierarchal tree selections, and gives you a clearer picture of how the general update pattern works with these types of selections. Maybe you had never heard of a punchcard chart before either, and now know when it would be appropriate to use one.</p>
+
+<p>If you have any questions or comments, please let me know! I am by no means a “D3 know it all”, so would appreciate any feedback you may have. Thanks!</p>
+
+			</span>
+
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://clhenrick.io/" target="_blank"> Chris Henrick</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2016-12-12" itemprop="datePublished"> 2016-12-12</time>
+				
+
+				<span class="icon-archive pr20"> </span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> Javascript</span> <span class="icon-price-tag pr10"> D3JS</span> <span class="icon-price-tag pr10"> Data Visualization</span> </span>
+			</p>
+
+			<div id="post-nav" class="row">
+				
+				<div class="small-4 columns text-center"><a class="button small radius prev" href="http://localhost:4000/aws-lambda-tile-generator/">&laquo; Introducing the AWS Lambda Tiler</a></div><!-- /.small-4.columns -->
+				
+				<div class="small-4 columns text-center"><a class="radius button small" href="http://localhost:4000/blog/archive/" title="Blog Archive">Archive</a></div><!-- /.small-4.columns -->
+				
+				<div class="small-4 columns text-center"><a class="button small radius next" href="http://localhost:4000/mpg-habitat-restoration-map/">Habitat Restoration Map for MPG Ranch &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			</div><!--  /.page-meta -->
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+				<div id="disqus_thread"></div>
+				<script>
+				    var disqus_config = function () {
+				        this.page.url =  'http://localhost:4000'
+				        this.page.identifier = '/d3-v4-general-update-pattern-punchcard-chart/';
+								this.page.title = 'D3JS v4 General Update Pattern: Punchcard Chart';
+				    };
+				    (function() {  // DON'T EDIT BELOW THIS LINE
+				        var d = document, s = d.createElement('script');
+
+				        s.src = '//clhenrick.disqus.com/embed.js';
+
+				        s.setAttribute('data-timestamp', +new Date());
+				        (d.head || d.body).appendChild(s);
+				    })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+			
+
+			
+		</article>
+	</div><!-- /.medium-8.columns -->
+
+
+	
+
+
+	
+</div><!-- /.row -->
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      <div id="footer">
+        <div class="row">
+          <div class="medium-6 large-5 columns">
+            <h5 class="shadow-black">About This Site</h5>
+
+            <p class="">
+              The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.
+              <a href="http://localhost:4000/about/">More ›</a>
+            </p>
+          </div><!-- /.large-6.columns -->
+
+
+          <div class="small-6 medium-3 large-3 large-offset-1 columns">
+            
+              
+                <h5 class="shadow-black">Services</h5>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+
+              <ul class="no-bullet shadow-black">
+              
+                
+                  <li >
+                    <a href=""  title=""></a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/contact/"  title="Contact">Contact</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/feed.xml"  title="Subscribe to RSS Feed">RSS</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/atom.xml"  title="Subscribe to Atom Feed">Atom</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/sitemap.xml"  title="Sitemap for Google Webmaster Tools">sitemap.xml</a>
+                  </li>
+              
+              </ul>
+          </div><!-- /.large-4.columns -->
+
+
+          <div class="small-6 medium-3 large-3 columns">
+            
+              
+                <h5 class="shadow-black">Network</h5>
+              
+            
+              
+            
+              
+            
+
+            <ul class="no-bullet shadow-black">
+            
+              
+                <li >
+                  <a href=""  title=""></a>
+                </li>
+            
+              
+                <li class="services-newsletter" >
+                  <a href="http://foundation.zurb.com/" target="_blank"  title="Built on Foundation">Built on Foundation</a>
+                </li>
+            
+              
+                <li class="site-code" >
+                  <a href="https://github.com/clhenrick/portfolio" target="_blank"  title="Code available on Github">Code on Github</a>
+                </li>
+            
+            </ul>
+          </div><!-- /.large-3.columns -->
+        </div><!-- /.row -->
+
+      </div><!-- /#footer -->
+
+
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>
+              Created with &hearts;
+              by&nbsp;<a href="http://clhenrick.io/">Chris&nbsp;Henrick</a>
+              using&nbsp;<a href="http://jekyllrb.com/" target="_blank">Jekyll</a>
+              based&nbsp;on&nbsp;<a href="http://phlow.github.io/feeling-responsive/">Feeling&nbsp;Responsive</a>.
+            </p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="https://github.com/clhenrick" target="_blank" class="icon-github" title="Code"></a></li>
+            
+              <li><a href="https://twitter.com/chrislhenrick" target="_blank" class="icon-twitter" title="Twitter"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+<!-- jQuery -->
+<script src="http://localhost:4000/assets/js/javascript.min.js"></script>
+<!-- lazy load -->
+<script src="http://localhost:4000/assets/js/jquery.lazyload.min.js"></script>
+
+<script type="text/javascript">
+// make all external links open in a new browser tab
+// code credit: https://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+$(function(){
+  $('a').each(function() {
+     var a = new RegExp('/' + window.location.host + '/');
+     if(!a.test(this.href)) {
+         $(this).click(function(event) {
+             event.preventDefault();
+             event.stopPropagation();
+             window.open(this.href, '_blank');
+         });
+     }
+  });
+
+  // lazy load images with class "lazy"
+  $("img.lazy").lazyload({
+    threshold: 200,
+    effect: "fadeIn"
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69968207-1', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+

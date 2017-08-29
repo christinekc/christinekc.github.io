@@ -1,0 +1,836 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+		<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Scraping Photo Metadata</title>
+	<link rel="stylesheet" type="text/css" href="http://localhost:4000/assets/css/styles_feeling_responsive.css" />
+	<script src="http://localhost:4000/assets/js/modernizr.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: [ 'Lato:400,700,400italic:latin', 'Work+Sans:400,700:latin' ]
+      }
+    });
+  </script>
+
+  <noscript>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic|Volkhov' rel='stylesheet' type='text/css' />
+  </noscript>
+
+  <meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA" />
+	
+	<meta name="description" content="Scraping digital photo exif data using Node JS for web mapping." />
+
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729"/>
+
+	
+
+
+
+	
+	<link rel="icon" sizes="32x32" href="http://localhost:4000/assets/img/favicon-32x32.png" />
+
+
+
+
+	
+	<link rel="icon" sizes="192x192" href="http://localhost:4000/assets/img/touch-icon-192x192.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="180x180" href="http://localhost:4000/assets/img/apple-touch-icon-180x180-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="http://localhost:4000/assets/img/apple-touch-icon-152x152-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/assets/img/apple-touch-icon-144x144-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="http://localhost:4000/assets/img/apple-touch-icon-120x120-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/assets/img/apple-touch-icon-114x114-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="http://localhost:4000/assets/img/apple-touch-icon-76x76-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/assets/img/apple-touch-icon-72x72-precomposed.png" />
+
+
+
+
+	
+	<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/assets/img/apple-touch-icon-precomposed.png" />	
+
+
+
+
+	
+	<meta name="msapplication-TileImage" content="http://localhost:4000/assets/img/msapplication_tileimage.png" />
+
+
+
+
+	
+	<meta name="msapplication-TileColor" content="#fabb00" />
+
+
+
+	<!-- Facebook Optimization -->
+	<meta property="og:locale" content="en_EN" />
+	
+	<meta property="og:title" content="Scraping Photo Metadata" />
+	<meta property="og:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, &amp; cartography services." />
+	<meta property="og:url" content="http://localhost:4000//scraping-photo-metadata/" />
+	<meta property="og:site_name" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography" />
+	
+
+	
+
+	<!-- Search Engine Optimization -->
+	<meta name="description" content="">
+	<meta name="google-site-verification" content="hb0oFgJAnd2i2LvJYSEIofF5sc24xc8hx2tTNittvHA">
+	
+	
+	<link rel="author" href="https://plus.google.com/u/0/103791827597799558729">
+	
+	
+	<link rel="canonical" href="http://localhost:4000/scraping-photo-metadata/">
+
+	
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:site" content="@chrislhenrick">
+	<meta name="twitter:creator" content="@chrislhenrick">
+	<meta name="twitter:title" content="Chris Henrick – Web Development, Data Visualization, GIS, Maps, and Cartography">
+	<meta name="twitter:description" content="The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.">
+	<meta name="twitter:image" content="http://localhost:4000/images/clhenrick-landing-header.jpg">
+	
+
+	<link type="text/plain" rel="author" href="http://localhost:4000/humans.txt" />
+
+	
+
+	
+</head>
+
+</head>
+<body id="top-of-page" class="">
+	
+	
+<div id="navigation" class="sticky">
+  <nav class="top-bar" role="navigation" data-topbar>
+    <ul class="title-area">
+      <li class="name">
+      <h1 class="show-for-small-only"><a href="http://localhost:4000" class="icon-tree"> Chris Henrick</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+    </ul>
+    <section class="top-bar-section">
+
+      <ul class="right">
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/search/">Search</a></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+            
+            
+              <li class="divider"></li>
+              <li><a href="http://localhost:4000/contact/">Contact</a></li>
+
+            
+            
+          
+        
+        
+      </ul>
+
+      <ul class="left">
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/">clhenrick</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+              <li><a href="http://localhost:4000/work/">Work</a></li>
+              <li class="divider"></li>
+
+            
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/about/">About</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/cv/">CV</a></li>
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/about/talks/">Talks</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+
+            
+            
+
+              <li class="has-dropdown">
+                <a href="http://localhost:4000/blog/">Blog</a>
+
+                  <ul class="dropdown">
+                    
+
+                      
+
+                      <li><a href="http://localhost:4000/blog/archive/">Blog Archive</a></li>
+                    
+                  </ul>
+
+              </li>
+              <li class="divider"></li>
+            
+          
+        
+
+              
+
+          
+          
+        
+
+              
+
+          
+          
+        
+        
+      </ul>
+    </section>
+  </nav>
+</div><!-- /#navigation -->
+
+	
+
+	
+
+
+
+
+
+	<div class="row t30">
+	<div class="medium-8 columns medium-offset-2 end">
+		<article itemscope itemtype="http://schema.org/Article">
+			<header>
+				
+
+				<span itemprop="name">
+					
+					<h1>Scraping Photo Metadata</h1>
+				</span>
+			</header>
+
+
+			
+			<p class="teaser" itemprop="description">
+				Scraping digital photo exif data using Node JS for web mapping.
+			</p>
+			
+
+			<span itemprop="articleSection">
+			<p>Now that my time as a grad student at the <a href="http://www.newschool.edu/parsons/mfa-design-technology/">Parsons MFA Design and Technology program</a> is finished, I’ve finally had some time to come back to a project I worked on in the fall of last year, the <a href="http://www.bushwickcommunitymap.org">Bushwick Community Map</a>. One important piece that has yet to be added to this project is data that was collected from a participatory mapping survey developed with the <a href="http://www.nwbcommunity.org/">North West Bushwick Community Group</a> and students from the <a href="http://www.newschool.edu/parsons/ms-design-urban-ecology/">Parsons Urban Ecologies program</a> last Fall. The survey involved mapping landuse in <a href="http://en.wikipedia.org/wiki/Bushwick,_Brooklyn">Bushwick</a> (eg: vacant lots and lots being used for informal purposes), abandoned buildings, and new construction. This data was collected as teams walked through the various census tracts in Bushwick, making observations on each block, and then filling out a form describing either a lot or building, recording the address, number of floors, state of distress, etc as well as photographing the site.</p>
+
+<h2 id="data-problems">Data Problems</h2>
+<p>While each photo was taken with geo location tracking enabled, there was some poor management of the photographs collected by various teams. Granted the photos were logically grouped by census tract in folders on Google Drive, yet no unified naming convention was used to name the photographs.</p>
+
+<p><img src="/images/photo-naming.png" alt="" /></p>
+
+<p>For example, a sensible naming convention could have been something like:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;building-number&gt;-&lt;street&gt;-&lt;census-tract&gt;.jpg</code></pre></figure>
+
+<p>The way in which the Urban Ecologies students then mapped the photos after they were collected was using Google Earth to produce a KML file of the photos’ locations. The problem with this approach is that for some reason unknown to me, the KML they produced only has ~700 features while there are a total of 1008 photos. I didn’t learn this until after the Urban Ecologies group shared then survey data, KML, and photos with me.</p>
+
+<p><img src="/images/bushwick_photos_qgis.png" alt="" /></p>
+
+<p>To make working with the photos easier I first uploaded all 1008 photos to <a href="https://www.flickr.com/">Flickr</a> which genorously gives all users a whole terabyte of free storage. I then used the <a href="https://www.flickr.com/services/api/">Flickr API</a> to <a href="#flickr-api-code">grab the URLs and title for each uploaded photo</a> and store them in a JSON file. For some reason I wasn’t able to see the geo data for the photos using this method which definitely would have helped save some time.</p>
+
+<p>My original solution was to merge all the layers in the KML file, then convert it to a GeoJSON format and then join it to the Flickr JSON data using the <a href="https://www.npmjs.com/package/joiner">joiner</a> module for Node JS. Yet I soon realized this was not a good strategy as the KML file was missing locations for ~300 photos.</p>
+
+<p>Thankfully one last solution occured to me; I could scrape the <a href="http://en.wikipedia.org/wiki/Exchangeable_image_file_format">Exif metadata</a> from the photos which includes latitude and longitude coordinates (only if geolocation was enabled from the camera).</p>
+
+<p>The question was, how to do this?</p>
+
+<h2 id="node-js-to-the-rescue">Node JS to the Rescue</h2>
+
+<p>I ended up finding a Node JS library that worked pretty well called <a href="https://github.com/gomfunkel/node-exif">Exif</a>. This module allows to retreive the Exif metadata in a JSON format. From here I <a href="#exif-data-extract">wrote a script</a> that iterates over the Exif data from all of the photos and outputs a GeoJSON file which I was then able to join to the Flickr JSON data. I ended up doing the join in <a href="https://cartodb.com/">CartoDB</a> because they make it so easy to do.</p>
+
+<p>The end result is that I successfully geocoded 1006 out of 1008 of the photos so that they can now be added to the Bushwick Community Map.</p>
+
+<p><img src="/images/bushwick_final_data_cartodb.png" alt="" /></p>
+
+<p>Next up, integrating the survey photos and data to the Bushwick Community Map!</p>
+
+<p>##Code</p>
+<h3>Extracting the Photos' Titles From File Names</h3>
+
+<p>In CartoDB I eneded up creating a new column for the exif geojson and populating it with a substring of the filename, the title without the file extension, so that I could join the Exif GeoJSON and Flickr JSON datasets.<br />
+The following SQL query did the trick:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="k">substring</span><span class="p">(</span><span class="n">file_name_column</span><span class="p">,</span> <span class="s1">'(.+?)(</span><span class="se">\.</span><span class="s1">[^.]*$|$)'</span><span class="p">)</span> <span class="k">FROM</span> <span class="k">table_name</span><span class="p">;</span></code></pre></figure>
+
+<p><a href="http://stackoverflow.com/questions/624870/regex-get-filename-without-extension-in-one-shot">stackoverflow credit</a></p>
+
+<p>###Exif Data Extract
+Node JS script to grab lat lon data from images. Processes a director of images and writes a geojson file containing the image name, lat, lon, modify data. Usage:</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"> <span class="nv">$ </span>touch photo_data.json <span class="o">&amp;&amp;</span> node parse_photos.js &gt; photo_data.json </code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'graceful-fs'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ExifImage</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'exif'</span><span class="p">).</span><span class="nx">ExifImage</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">exifCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">imgDir</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../all_photos/'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">imgData</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"type"</span> <span class="p">:</span> <span class="s2">"FeatureCollection"</span><span class="p">,</span>
+                <span class="s2">"crs"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"name"</span><span class="p">,</span>
+                  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"urn:ogc:def:crs:OGC:1.3:CRS84"</span>
+                    <span class="p">}</span>
+                  <span class="p">},</span>
+                <span class="s2">"features"</span> <span class="p">:</span> <span class="p">[]</span>
+              <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">// converts lat lon from Degrees Minutes Seconds to Decimal Degrees</span>
+<span class="kd">function</span> <span class="nx">convertDMSToDD</span><span class="p">(</span><span class="nx">degrees</span><span class="p">,</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">direction</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dd</span> <span class="o">=</span> <span class="nx">degrees</span> <span class="o">+</span> <span class="nx">minutes</span><span class="o">/</span><span class="mi">60</span> <span class="o">+</span> <span class="nx">seconds</span><span class="o">/</span><span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">direction</span> <span class="o">==</span> <span class="s2">"S"</span> <span class="o">||</span> <span class="nx">direction</span> <span class="o">==</span> <span class="s2">"W"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">dd</span> <span class="o">=</span> <span class="nx">dd</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="c1">// Don't do anything for N or E</span>
+    <span class="k">return</span> <span class="nx">dd</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">parseExifData</span><span class="p">(</span><span class="nx">exifObj</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">"type"</span> <span class="p">:</span> <span class="s2">"Feature"</span><span class="p">,</span>
+                <span class="s2">"geometry"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"type"</span> <span class="p">:</span> <span class="s2">"Point"</span><span class="p">,</span>
+                  <span class="s2">"coordinates"</span> <span class="p">:</span> <span class="p">[]</span>
+                <span class="p">},</span>
+                <span class="s2">"properties"</span> <span class="p">:</span> <span class="p">{}</span>
+              <span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">exifObj</span><span class="p">;</span>  
+  <span class="kd">var</span> <span class="nx">imgName</span> <span class="o">=</span> <span class="nx">name</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">file_name</span> <span class="o">=</span> <span class="nx">imgName</span><span class="p">[</span><span class="nx">imgName</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">convertDMSToDD</span><span class="p">(</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLatitude</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLatitude</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLatitude</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLatitudeRef</span>
+                            <span class="p">);</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">convertDMSToDD</span><span class="p">(</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLongitude</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLongitude</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLongitude</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="nx">d</span><span class="p">.</span><span class="nx">gps</span><span class="p">.</span><span class="nx">GPSLongitudeRef</span>
+                            <span class="p">);</span>
+  <span class="nx">data</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">modify_date</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">ModifyDate</span><span class="p">;</span>
+  <span class="nx">imgData</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="nx">exifCount</span> <span class="o">++</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">exifCount</span> <span class="o">===</span> <span class="mi">1006</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">imgData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">imgData</span><span class="p">);</span>
+    <span class="nx">errors</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">errors</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">imgData</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">readImage</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+      <span class="k">new</span> <span class="nx">ExifImage</span><span class="p">({</span> <span class="na">image</span> <span class="p">:</span> <span class="nx">img</span> <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">exifData</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span>            
+            <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="nx">img</span><span class="p">,</span> <span class="na">err</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">});</span>
+          <span class="k">else</span>
+            <span class="nx">parseExifData</span><span class="p">(</span><span class="nx">exifData</span><span class="p">,</span> <span class="nx">img</span><span class="p">);</span>
+      <span class="p">});</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>      
+      <span class="nx">errors</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="nx">img</span><span class="p">,</span> <span class="na">err</span><span class="p">:</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">});</span>
+  <span class="p">}</span>  
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">readDataDir</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nx">files</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="nx">i</span><span class="p">){</span>
+    <span class="nx">file</span> <span class="o">=</span> <span class="s1">'../all_photos/'</span> <span class="o">+</span> <span class="nx">file</span><span class="p">;</span>
+    <span class="nx">readImage</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+    <span class="nx">count</span><span class="o">++</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">readDataDir</span><span class="p">(</span><span class="s1">'../all_photos/'</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="flickr-api-code">Flickr API Code</h3>
+<p>Node JS script to grab data from the Flickr API.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">),</span>
+      <span class="nx">jf</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jsonfile'</span><span class="p">),</span>
+      <span class="nx">Flickr</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'flickrapi'</span><span class="p">),</span>
+      <span class="nx">async</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'async'</span><span class="p">),</span>
+      <span class="nx">joiner</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'joiner'</span><span class="p">),</span>
+      <span class="nx">GeoJson</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'geojson'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">flickrOptions</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">api_key</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+      <span class="na">secret</span><span class="p">:</span> <span class="s2">"..."</span><span class="p">,</span>
+      <span class="na">user_id</span><span class="p">:</span> <span class="s2">"..."</span>
+    <span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">newGeoJson</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">callFlickrAPI</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="nx">Flickr</span><span class="p">.</span><span class="nx">tokenOnly</span><span class="p">(</span><span class="nx">flickrOptions</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">flickr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">flickr</span><span class="p">.</span><span class="nx">photos</span><span class="p">.</span><span class="nx">search</span><span class="p">({</span>
+        <span class="na">user_id</span><span class="p">:</span> <span class="nx">flickr</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">user_id</span><span class="p">,</span>
+        <span class="na">page</span><span class="p">:</span> <span class="nx">i</span><span class="p">,</span>
+        <span class="na">per_page</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+        <span class="na">extras</span><span class="p">:</span> <span class="s2">"url_m"</span>
+      <span class="p">},</span> 
+
+      <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'error: '</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>              
+        
+        <span class="kd">var</span> <span class="nx">photos</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">photos</span><span class="p">.</span><span class="nx">photo</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span> <span class="nx">photos</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">photos</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+          <span class="nx">count</span> <span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">===</span> <span class="mi">1008</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">processJson</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">}</span>        
+
+      <span class="p">});</span>  
+    <span class="p">}</span>      
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processJson</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">o</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">o</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+      <span class="na">title</span> <span class="p">:</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">title</span><span class="p">,</span>
+      <span class="na">url</span> <span class="p">:</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">url_m</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="nx">jf</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="s1">'flickrPhotoData.json'</span><span class="p">,</span> <span class="nx">o</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'error: '</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="nx">joinJson</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">joinJson</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">data_a</span> <span class="o">=</span> <span class="nx">newGeoJson</span><span class="p">,</span>
+        <span class="nx">data_b</span> <span class="o">=</span> <span class="nx">data</span><span class="p">,</span>
+        <span class="nx">key_a</span> <span class="o">=</span> <span class="s1">'name'</span><span class="p">,</span>
+        <span class="nx">key_b</span> <span class="o">=</span> <span class="s1">'title'</span><span class="p">,</span>
+        <span class="nx">data_joined</span> <span class="o">=</span> <span class="nx">joiner</span><span class="p">.</span><span class="nx">geoJson</span><span class="p">(</span><span class="nx">data_a</span><span class="p">,</span> <span class="nx">key_a</span><span class="p">,</span> <span class="nx">data_b</span><span class="p">,</span> <span class="nx">key_b</span><span class="p">,</span> <span class="s1">'properties'</span><span class="p">);</span>
+  <span class="nx">writeJson</span><span class="p">(</span><span class="nx">data_joined</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">writeJson</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="s2">"flickrData.json"</span><span class="p">;</span>
+  <span class="nx">jf</span><span class="p">.</span><span class="nx">writeFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'writeJson error: '</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span> <span class="k">return</span><span class="p">;}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'data written. report: '</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">report</span><span class="p">.</span><span class="nx">prose</span><span class="p">.</span><span class="nx">summary</span><span class="p">);</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">processGeoJson</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">inputGeoJson</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">'../data/nwb_photos.geojson'</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">jsonOut</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">inputGeoJson</span><span class="p">.</span><span class="nx">features</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">jsonOut</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+      <span class="na">name</span> <span class="p">:</span> <span class="nx">inputGeoJson</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">properties</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+      <span class="na">lat</span> <span class="p">:</span> <span class="nx">inputGeoJson</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+      <span class="na">lon</span> <span class="p">:</span> <span class="nx">inputGeoJson</span><span class="p">.</span><span class="nx">features</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">});</span>
+    <span class="c1">// console.log(inputGeoJson.features[i].geometry.coordinates);</span>
+  <span class="p">}</span>
+  
+  <span class="nx">newGeoJson</span> <span class="o">=</span> <span class="nx">GeoJson</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonOut</span><span class="p">,</span> <span class="p">{</span><span class="na">Point</span><span class="p">:</span> <span class="p">[</span><span class="s1">'lat'</span><span class="p">,</span> <span class="s1">'lon'</span><span class="p">],</span> <span class="na">include</span><span class="p">:</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">]});</span>
+  <span class="nx">callFlickrAPI</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="nx">processGeoJson</span><span class="p">();</span></code></pre></figure>
+
+			</span>
+
+			
+						<div id="page-meta" class="t30">
+				<p>
+					<!-- Look the author details up from the site config. -->
+					
+					<!-- Output author details if some exist. -->
+					
+					<span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name" class="pr20 icon-edit"><a href="http://clhenrick.io/" target="_blank"> Chris Henrick</a></span>
+				</span>
+				
+
+				
+				<time class="icon-calendar pr20" datetime="2015-05-29" itemprop="datePublished"> 2015-05-29</time>
+				
+
+				<span class="icon-archive pr20"> </span>
+				<br />
+				<span class="pr20"><span class="icon-price-tag pr10"> data</span> <span class="icon-price-tag pr10"> web-scraping</span> <span class="icon-price-tag pr10"> node-js</span> <span class="icon-price-tag pr10"> web-mapping</span> <span class="icon-price-tag pr10"> flickr-api</span> <span class="icon-price-tag pr10"> cartodb</span> </span>
+			</p>
+
+			<div id="post-nav" class="row">
+				
+				<div class="small-4 columns text-center"><a class="radius button small" href="http://localhost:4000/blog/archive/" title="Blog Archive">Archive</a></div><!-- /.small-4.columns -->
+				
+				<div class="small-4 columns text-center"><a class="button small radius next" href="http://localhost:4000/airs-data-processing/">Data processing methodology for Am I Rent Stabilized.com &raquo;</a></div><!-- /.small-4.columns -->
+				
+			</div>
+			</div><!--  /.page-meta -->
+			
+
+			
+						
+				<h3 id="comments" class="t60">Dialogue &amp; Discussion</h3>
+				<div id="disqus_thread"></div>
+				<script>
+				    var disqus_config = function () {
+				        this.page.url =  'http://localhost:4000'
+				        this.page.identifier = '/scraping-photo-metadata/';
+								this.page.title = 'Scraping Photo Metadata';
+				    };
+				    (function() {  // DON'T EDIT BELOW THIS LINE
+				        var d = document, s = d.createElement('script');
+
+				        s.src = '//clhenrick.disqus.com/embed.js';
+
+				        s.setAttribute('data-timestamp', +new Date());
+				        (d.head || d.body).appendChild(s);
+				    })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+			
+
+			
+		</article>
+	</div><!-- /.medium-8.columns -->
+
+
+	
+
+
+	
+</div><!-- /.row -->
+
+
+	
+	    <div id="up-to-top" class="row">
+      <div class="small-12 columns" style="text-align: right;">
+        <a class="iconfont" href="#top-of-page">&#xf108;</a>
+      </div><!-- /.small-12.columns -->
+    </div><!-- /.row -->
+
+
+    <footer id="footer-content" class="bg-grau">
+      <div id="footer">
+        <div class="row">
+          <div class="medium-6 large-5 columns">
+            <h5 class="shadow-black">About This Site</h5>
+
+            <p class="">
+              The portfolio and technical blog of Chris Henrick – provider of professional web development, data visualization, GIS, mapping, & cartography services.
+              <a href="http://localhost:4000/about/">More ›</a>
+            </p>
+          </div><!-- /.large-6.columns -->
+
+
+          <div class="small-6 medium-3 large-3 large-offset-1 columns">
+            
+              
+                <h5 class="shadow-black">Services</h5>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+
+              <ul class="no-bullet shadow-black">
+              
+                
+                  <li >
+                    <a href=""  title=""></a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/contact/"  title="Contact">Contact</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/feed.xml"  title="Subscribe to RSS Feed">RSS</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/atom.xml"  title="Subscribe to Atom Feed">Atom</a>
+                  </li>
+              
+                
+                  <li >
+                    <a href="/sitemap.xml"  title="Sitemap for Google Webmaster Tools">sitemap.xml</a>
+                  </li>
+              
+              </ul>
+          </div><!-- /.large-4.columns -->
+
+
+          <div class="small-6 medium-3 large-3 columns">
+            
+              
+                <h5 class="shadow-black">Network</h5>
+              
+            
+              
+            
+              
+            
+
+            <ul class="no-bullet shadow-black">
+            
+              
+                <li >
+                  <a href=""  title=""></a>
+                </li>
+            
+              
+                <li class="services-newsletter" >
+                  <a href="http://foundation.zurb.com/" target="_blank"  title="Built on Foundation">Built on Foundation</a>
+                </li>
+            
+              
+                <li class="site-code" >
+                  <a href="https://github.com/clhenrick/portfolio" target="_blank"  title="Code available on Github">Code on Github</a>
+                </li>
+            
+            </ul>
+          </div><!-- /.large-3.columns -->
+        </div><!-- /.row -->
+
+      </div><!-- /#footer -->
+
+
+      <div id="subfooter">
+        <nav class="row">
+          <section id="subfooter-left" class="small-12 medium-6 columns credits">
+            <p>
+              Created with &hearts;
+              by&nbsp;<a href="http://clhenrick.io/">Chris&nbsp;Henrick</a>
+              using&nbsp;<a href="http://jekyllrb.com/" target="_blank">Jekyll</a>
+              based&nbsp;on&nbsp;<a href="http://phlow.github.io/feeling-responsive/">Feeling&nbsp;Responsive</a>.
+            </p>
+          </section>
+
+          <section id="subfooter-right" class="small-12 medium-6 columns">
+            <ul class="inline-list social-icons">
+            
+              <li><a href="https://github.com/clhenrick" target="_blank" class="icon-github" title="Code"></a></li>
+            
+              <li><a href="https://twitter.com/chrislhenrick" target="_blank" class="icon-twitter" title="Twitter"></a></li>
+            
+            </ul>
+          </section>
+        </nav>
+      </div><!-- /#subfooter -->
+    </footer>
+
+	
+
+	
+
+<!-- jQuery -->
+<script src="http://localhost:4000/assets/js/javascript.min.js"></script>
+<!-- lazy load -->
+<script src="http://localhost:4000/assets/js/jquery.lazyload.min.js"></script>
+
+<script type="text/javascript">
+// make all external links open in a new browser tab
+// code credit: https://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+$(function(){
+  $('a').each(function() {
+     var a = new RegExp('/' + window.location.host + '/');
+     if(!a.test(this.href)) {
+         $(this).click(function(event) {
+             event.preventDefault();
+             event.stopPropagation();
+             window.open(this.href, '_blank');
+         });
+     }
+  });
+
+  // lazy load images with class "lazy"
+  $("img.lazy").lazyload({
+    threshold: 200,
+    effect: "fadeIn"
+  });
+});
+
+</script>
+
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69968207-1', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>
+
