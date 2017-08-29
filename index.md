@@ -1,7 +1,7 @@
 ---
-layout: archive
+layout: media
 permalink: /
-title: "Latest Posts"
+title: "Christine KC Cheng"
 ---
 
 <div class="tiles">
