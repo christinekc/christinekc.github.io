@@ -18,7 +18,7 @@ a.active,
 a:active,
 a:focus,
 a:hover {
-  color: s#9DCEFC;
+  color: #9DCEFC;
   outline: none; }
 
 h1,
@@ -403,24 +403,24 @@ footer {
   background-color: #9DCEFC; }
   .btn-success.focus, .btn-success:focus {
     color: white;
-    border-color: #0a4b3e;
-    background-color: #128f76; }
+    border-color: #3e5264;
+    background-color: #6d90b0; }
   .btn-success:hover {
     color: white;
-    border-color: #11866f;
-    background-color: #128f76; }
+    border-color: #5e7b97;
+    background-color: #6d90b0; }
   .btn-success.active, .btn-success:active,
   .open > .btn-success.dropdown-toggle {
     color: white;
-    border-color: #11866f;
-    background-color: #128f76; }
+    border-color: #5e7b97;
+    background-color: #6d90b0; }
     .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success:active.focus, .btn-success:active:focus, .btn-success:active:hover,
     .open > .btn-success.dropdown-toggle.focus,
     .open > .btn-success.dropdown-toggle:focus,
     .open > .btn-success.dropdown-toggle:hover {
       color: white;
-      border-color: #0a4b3e;
-      background-color: #0e6f5c; }
+      border-color: #3e5264;
+      background-color: #5e7b97; }
   .btn-success.active, .btn-success:active,
   .open > .btn-success.dropdown-toggle {
     background-image: none; }
