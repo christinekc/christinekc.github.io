@@ -203,7 +203,7 @@ header.masthead {
       -moz-transition: all ease 0.5s;
       transition: all ease 0.5s;
       opacity: 0;
-      background: #9DCEFC; }
+      background: rgba(157,206,252,.9); }
       #portfolio .portfolio-item .portfolio-link .caption:hover {
         opacity: 1; }
       #portfolio .portfolio-item .portfolio-link .caption .caption-content {
