@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+    <link href="css/freelancer.css" rel="stylesheet">
 
   </head>
 
@@ -107,7 +107,12 @@
       <div class="container">
         <h2 class="text-center">Portfolio</h2>
         <hr class="star-primary">
+        <div class="col-lg-8 mx-auto text-center">
+          Please click on the pictures to learn more about the projects!
+        </div>
+        <br/>
         <div class="row">
+
           <div class="col-sm-4 portfolio-item">
             <a class="portfolio-link" href="#portfolioModal3" data-toggle="modal">
               <div class="caption">
@@ -116,9 +121,18 @@
                 </div>
               </div>
               <img class="img-fluid" src="img/portfolio/dude_home.png" alt="">
-              DUDE
             </a>
+            <h3>
+              <a href="#portfolioModal3" data-toggle="modal">DUDE</a>
+              <a href="https://github.com/christinekc/the_mages" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </h3>
+            <p class="caption">NGI SDK, Twilio, Flask, JavaScript, HTML, CSS</p>
+            <p class="description">A personalized car assistant for level 3 self-driving cars.</p>
+            <h6>
+              <i class="fa fa-trophy" aria-hidden="true"></i> GM Hack AI: First Place
+            </h6>
           </div>
+
           <div class="col-sm-4 portfolio-item">
             <a class="portfolio-link" href="#portfolioModal2" data-toggle="modal">
               <div class="caption">
@@ -126,10 +140,16 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="img/portfolio/whats_happening.png" alt="">
-              What's Happening
+              <img class="center" src="img/portfolio/whats_happening.png" alt="" height="230">
             </a>
+            <h3>
+              <a href="#portfolioModal3" data-toggle="modal">What's Happening</a>
+              <a href="https://github.com/AndreyBorisKhesin/Sorcerers" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </h3>
+            <p class="caption">AngularJS, Ionic, Cordova, Firebase</p>
+            <p class="description">A mobile app for discovering the latest nearby events.</p>
           </div>
+
           <div class="col-sm-4 portfolio-item">
             <a class="portfolio-link" href="#portfolioModal1" data-toggle="modal">
               <div class="caption">
@@ -138,41 +158,20 @@
                 </div>
               </div>
               <img class="img-fluid" src="img/portfolio/textmd_group.png" alt="">
-              Text MD
             </a>
+            <h3>
+              <a href="#portfolioModal3" data-toggle="modal">
+                Text MD
+              </a>
+              <a href="https://github.com/AndreyBorisKhesin/Wizards" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+            </h3>
+            <p class="caption">Twilio, Flask, Infermedica API, Python</p>
+            <p class="description">An interactive server accessible through SMS that can diagnose a patient's condition in real time.</p>
+            <h6>
+              <i class="fa fa-trophy" aria-hidden="true"></i> Break Inequality Hackathon: Most Creative Use of the Twilio API Award
+            </h6>
           </div>
-          <!--<div class="col-sm-4 portfolio-item">
-            <a class="portfolio-link" href="#portfolioModal4" data-toggle="modal">
-              <div class="caption">
-                <div class="caption-content">
-                  <i class="fa fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <img class="img-fluid" src="img/portfolio/game.png" alt="">
-            </a>
-          </div>
-          <div class="col-sm-4 portfolio-item">
-            <a class="portfolio-link" href="#portfolioModal5" data-toggle="modal">
-              <div class="caption">
-                <div class="caption-content">
-                  <i class="fa fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <img class="img-fluid" src="img/portfolio/safe.png" alt="">
-            </a>
-          </div>
-          <div class="col-sm-4 portfolio-item">
-            <a class="portfolio-link" href="#portfolioModal6" data-toggle="modal">
-              <div class="caption">
-                <div class="caption-content">
-                  <i class="fa fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <img class="img-fluid" src="img/portfolio/submarine.png" alt="">
-            </a>
-          </div>
-        </div>
-      </div>-->
+
     </section>
 
     <!-- Contact Section -->
@@ -220,7 +219,7 @@
               </div>
             </form>-->
 
-            <form action="http://formspree.io/christinekc.cheng@gmail.com" method="POST">
+            <form id="contact-form" action="http://formspree.io/christinekc.cheng@gmail.com" method="POST">
               <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
                   <label>Email Address</label>
@@ -233,6 +232,7 @@
                   <label>Message</label>
                   <textarea class="form-control" id="message" name="message" rows="5" placeholder="Message" required data-validation-required-message="Please enter a message."></textarea>
                   <p class="help-block text-danger"></p>
+                  <input type="text" name="_gotcha" style="display:none" />
                 </div>
               </div>
               <br>
@@ -589,8 +589,7 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
+    <script src="js/formspree.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
