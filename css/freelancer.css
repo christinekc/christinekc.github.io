@@ -88,10 +88,10 @@ hr.star-light:after {
   background-color: #9DCEFC; }
 
 hr.star-primary {
-  border-color: #4e677e; }
+  border-color: #000000; }
 
 hr.star-primary:after {
-  color: #4e677e;
+  color: #000000;
   background-color: white; }
 
 img.center {
