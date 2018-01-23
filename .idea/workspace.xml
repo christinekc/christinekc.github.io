@@ -24,8 +24,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="796" column="43" lean-forward="true" selection-start-line="796" selection-start-column="43" selection-end-line="796" selection-end-column="43" />
+            <state relative-caret-position="324">
+              <caret line="225" column="20" lean-forward="false" selection-start-line="202" selection-start-column="14" selection-end-line="225" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -129,7 +129,6 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="773" />
@@ -295,15 +294,15 @@
       <workItem from="1514798077928" duration="2197000" />
       <workItem from="1514974804327" duration="969000" />
       <workItem from="1515534074730" duration="1253000" />
-      <workItem from="1516676381006" duration="2280000" />
+      <workItem from="1516676381006" duration="3616000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57032000" />
+    <option name="totallyTimeSpent" value="58368000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1280" height="773" extended-state="0" />
+    <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359015" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -410,8 +409,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="796" column="43" lean-forward="true" selection-start-line="796" selection-start-column="43" selection-end-line="796" selection-end-column="43" />
+        <state relative-caret-position="324">
+          <caret line="225" column="20" lean-forward="false" selection-start-line="202" selection-start-column="14" selection-end-line="225" selection-end-column="20" />
           <folding />
         </state>
       </provider>
